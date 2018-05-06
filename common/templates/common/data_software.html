@@ -1,2 +1,61 @@
 {% extends "common/base.html" %}
 {% load staticfiles %}
+
+{% block head %}
+<link href="{% static 'common/css/datasoftware.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="grid-container full grid-frame color-bg ds-col">
+    <br><br>
+    <div class="grid-x">
+        <div class="cell small-8 small-offset-2">
+            <h1 class="text-center">d a t a / s o f t w a r e</h1>
+        </div>
+    </div>
+    <div class="grid-x">
+        <div class="cell small-8 small-offset-2">
+            <h3>data</h3>
+        </div>
+        {% for d in data %}
+        <div class="cell small-8 small-offset-2 ds-box">
+            <div class="grid-x">
+                <div class="cell small-2">
+                    {% if d.image %}
+                    <a target="_blank" href="{{ d.link }}"><img class="img-responsive" src="{{ d.image.url }}"></a>
+                    {% endif %}
+                </div>
+                <div class="cell small-5 small-offset-1">
+                    <h4>{{ d.title }}</h4>
+                    {% autoescape off %}
+                    {{ d.description }}
+                    {% endautoescape %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="grid-x">
+        <div class="cell small-8 small-offset-2">
+            <h3>software</h3>
+        </div>
+        {% for s in software %}
+        <div class="cell small-8 small-offset-2 ds-box">
+            <div class="grid-x">
+                <div class="cell small-2">
+                    {% if s.image %}
+                    <a target="_blank" href="{{ s.link }}"><img class="img-responsive" src="{{ s.image.url }}"></a>
+                    {% endif %}
+                </div>
+                <div class="cell small-5 small-offset-1">
+                    <h4>{{ s.title }}</h4>
+                    {% autoescape off %}
+                    {{ s.description }}
+                    {% endautoescape %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

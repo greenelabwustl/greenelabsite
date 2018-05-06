@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="grid-container full grid-frame color-bg">
+<div class="grid-container full grid-frame color-bg person-col">
     <br><br>
     <div class="grid-x">
         <div class="cell small-8 small-offset-2">
@@ -18,7 +18,11 @@
         <div class="cell small-8 small-offset-2 person-box">
             <div class="grid-x">
                 <div class="cell small-2">
+                    {% if person.photo %}
+                    <img class="img-responsive" src="{{ person.photo.url }}">
+                    {% else %}
                     <img class="img-responsive" src="{% static 'common/img/person-placeholder.jpg' %}">
+                    {% endif %}
                 </div>
                 <div class="cell small-5 small-offset-1">
                     <h4>{{ person.first_name }} {{ person.last_name }}</h4>

@@ -123,7 +123,6 @@ class publication_link(models.Model):
     # Publication Link Name
     name = models.CharField(
         max_length = 350,
-        unique = True,
         null = True,
         blank = True,
         verbose_name = "Name"
