@@ -2,33 +2,36 @@
 {% load staticfiles %}
 
 {% block head %}
-<style>
-.img-responsive {
-    display: block;
-    max-width: 100%;
-    height: auto;
-}
-.person-box {
-    padding: 30px 0 30px 0;
-}
-</style>
+<link href="{% static 'common/css/people.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-<div class="grid-container full grid-frame">
+<div class="grid-container full grid-frame color-bg">
+    <br><br>
     <div class="grid-x">
         <div class="cell small-8 small-offset-2">
-            <h1>Lab Members</h1>
+            <h1 class="text-center">l a b&nbsp;&nbsp;&nbsp;&nbsp;m e m b e r s</h1>
         </div>
     </div>
     <div class="grid-x">
+        {% for person in members %}
         <div class="cell small-8 small-offset-2 person-box">
             <div class="grid-x">
                 <div class="cell small-2">
                     <img class="img-responsive" src="{% static 'common/img/person-placeholder.jpg' %}">
                 </div>
+                <div class="cell small-5 small-offset-1">
+                    <h4>{{ person.first_name }} {{ person.last_name }}</h4>
+                    <p>{% if person.title %}Title: {{ person.title }}{% endif %} {% if person.title and person.email %}|{% endif %}
+                       {% if person.email %}Email: {{ person.email }}{% endif %} {% if person.email and person.phone %}|{% endif %}
+                       {% if person.phone %}Phone: {{ person.phone }}{% endif %}</p>
+                    {% autoescape off %}
+                    {{ person.blurb }}
+                    {% endautoescape %}
+                </div>
             </div>
         </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

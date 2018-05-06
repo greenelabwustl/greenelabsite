@@ -1,2 +1,53 @@
 {% extends "common/base.html" %}
 {% load staticfiles %}
+
+{% block head %}
+<link href="{% static 'common/css/publications.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="grid-container full grid-frame color-bg pub-col">
+    <br><br>
+    <div class="grid-x">
+        <div class="cell small-8 small-offset-2">
+            <h1 class="text-center">p u b l i c a t i o n s</h1>
+        </div>
+    </div>
+    <div class="grid-x">
+        <div class="cell small-8 small-offset-2">
+            <div class="grid-x">
+                <div class="cell small-8 small-offset-2">
+                    <input class="text-center" id="search" name="search" placeholder="Search Publications" type="search" data-list=".list">
+                </div>
+                <div class="cell small-12">
+                    <div class="list">
+                        {% for current_year in years %}
+                        <h4>{{ current_year }}</h4>
+                        {% for pub in publications %}
+                        {% if pub.date.year == current_year %}
+                        <p>{% autoescape off %}{{ pub.container }}{% endautoescape %}
+                            {% if pub.paper %}
+                            [<a target="_blank" href="{{ pub.paper.url }}">PDF</a>]
+                            {% endif %}
+                            {% for pub_link in pub.publication_link_set.all %}
+                            {% if pub_link.name %}
+                            [<a target="_blank" href="{{ pub_link.link }}">{{ pub_link.name }}</a>]
+                            {% else %}
+                            [<a target="_blank" href="{{ pub_link.link }}">Article</a>]
+                            {% endif %}
+                            {% endfor %}</p>
+                        {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.rawgit.com/vdw/HideSeek/master/jquery.hideseek.min.js"></script>
+<script>$(document).ready(()=>{$('#search').hideseek({ignore:'h4',highlight: true});});</script>
+{% endblock %}
