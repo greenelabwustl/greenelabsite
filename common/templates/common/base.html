@@ -58,14 +58,10 @@
       src="https://code.jquery.com/jquery-3.2.1.min.js"
       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
       crossorigin="anonymous"></script>
+    <script src="https://fastcdn.org/FlowType.JS/1.1/flowtype.js"></script>
     <script src="{% static 'common/js/foundation.js' %}"></script>
-    <script>
-        $(document).ready(function(){
-            $(document).foundation();
-            $(".hamburger").click(function(){
-                $(this).toggleClass("is-active");
-            });
-        });
+    <script>$(document).ready(()=>{
+        $(document).foundation();$(".hamburger").click(function(){$(this).toggleClass("is-active");});});
     </script>
     {% block scripts %}
     {% endblock %}

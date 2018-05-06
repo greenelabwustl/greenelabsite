@@ -6,23 +6,28 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-
 .research-text {
     padding: 20px 0px;
 }
-
 .research-cover {
     background-image: url("../img/research_cover.jpg");
 }
-
 .research-img1 {
     background-image: url("../img/img1.jpg");
 }
-
 .research-img2 {
-  background-image: url("../img/img2.jpg");
+    background-image: url("../img/img2.jpg");
 }
-
 .research-img3 {
-  background-image: url("../img/img3.jpg");
+    background-image: url("../img/img3.jpg");
+}
+.white-text {
+    color: #fdfdfd;
+}
+.black-bg {
+    background-color: #222222;
+}
+.research-head {
+    background-color: rgba(34,34,34,0.8);
+    padding: 10px 10px;
 }

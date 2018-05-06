@@ -7,12 +7,12 @@
 
 {% block content %}
 <div class="grid-container full grid-frame">
-    <div class="grid-x">
-        <div class="cell small-12 parallax research-cover block1" style="color:white;">
+    <div class="grid-x white-text black-bg">
+        <div class="cell small-12 parallax research-cover block1">
             <div class="grid-y grid-frame">
                 <div class="cell small-5"></div>
                 <div class="cell small-2">
-                    <h1 class="text-center">r e s e a r c h</h1>
+                    <h1 class="text-center"><span class="research-head">r e s e a r c h</span></h1>
                 </div>
             </div>
         </div>
@@ -37,8 +37,8 @@
             <div class="grid-y grid-frame">
                 <div class="cell small-5"></div>
                 <div class="cell small-2">
-                    <h1 class="text-center">Characterizing brain systems
-                        at the group level</h1>
+                    <h1 class="text-center"><span class="research-head">Characterizing brain systems
+                        at the group level</span></h1>
                 </div>
             </div>
         </div>
@@ -57,8 +57,8 @@
             <div class="grid-y grid-frame">
                 <div class="cell small-5"></div>
                 <div class="cell small-2">
-                    <h1 class="text-center">Predicting developmental
-                            outcomes</h1>
+                    <h1 class="text-center"><span class="research-head">Predicting developmental
+                            outcomes</span></h1>
                 </div>
             </div>
         </div>
@@ -76,8 +76,8 @@
             <div class="grid-y grid-frame">
                 <div class="cell small-5"></div>
                 <div class="cell small-2">
-                    <h1 class="text-center">Characterizing brain systems
-                        at the individual level</h1>
+                    <h1 class="text-center"><span class="research-head">Characterizing brain systems
+                        at the individual level</span></h1>
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
             <div class="grid-y grid-frame">
                 <div class="cell small-5"></div>
                 <div class="cell small-2">
-                    <h1 class="text-center">Tourette syndrome</h1>
+                    <h1 class="text-center"><span class="research-head">Tourette syndrome</span></h1>
                 </div>
             </div>
         </div>
@@ -114,8 +114,8 @@
             <div class="grid-y grid-frame">
                 <div class="cell small-5"></div>
                 <div class="cell small-2">
-                    <h1 class="text-center">Methods for improving MRI data
-                        quality</h1>
+                    <h1 class="text-center"><span class="research-head">Methods for
+                        improving MRI data quality</span></h1>
                 </div>
             </div>
         </div>
@@ -139,14 +139,20 @@
 
 {% block scripts %}
 <script>
+$('.research-text').flowtype({
+    minimum:500,
+    maximum:1000,
+    minFont:12,
+    maxFont:18,
+    fontRatio:30
+});
 function bgscroll(element,initialpos,percentmov) {
-    $(document).ready(function(){
+    $(document).ready(()=>{
         var ypos = initialpos;
         let inittop = document.documentElement.scrollTop || document.body.scrollTop;
         $(element).css("background-position-y",`${inittop*percentmov+ypos}%`);
-        $(document).on('scroll',(event) => {
-            let delta = event.originalEvent.deltaY;
-            let scrolltype = ((delta>0)?'down':'up');
+        $(document).on('scroll',(event)=>{
+            let scrolltype = ((event.originalEvent.deltaY>0)?'down':'up');
             let top = document.documentElement.scrollTop || document.body.scrollTop;
             // decision
             if (scrolltype == 'down') {
@@ -155,17 +161,15 @@ function bgscroll(element,initialpos,percentmov) {
             if (scrolltype == 'up') {
                 if (top == 0) { return };
             }
-            let move = percentmov*top;
-            let newypos = ypos + move;
-            $(element).css("background-position-y",`${newypos}%`);
+            $(element).css("background-position-y",`${ypos+percentmov*top}%`);
         });
     });
 }
 bgscroll('.block1',70,0.05);
-bgscroll('.block2',0,0.05);
-bgscroll('.block3',-80,0.05);
-bgscroll('.block4',-120,0.05);
-bgscroll('.block5',-170,0.05);
-bgscroll('.block6',-240,0.05);
+bgscroll('.block2',-10,0.05);
+bgscroll('.block3',-90,0.05);
+bgscroll('.block4',-140,0.05);
+bgscroll('.block5',-200,0.05);
+bgscroll('.block6',-260,0.05);
 </script>
 {% endblock %}
