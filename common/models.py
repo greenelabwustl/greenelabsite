@@ -140,31 +140,6 @@ class publication_link(models.Model):
     def __str__(self):
         return self.link
 
-# Create class for news item
-class news_item(models.Model):
-    class Meta:
-        verbose_name = "News Item"
-
-    # news title
-    title = models.CharField(
-        max_length = 350,
-        unique = True,
-        verbose_name = "Title"
-    )
-
-    # post Date
-    pub_date = models.DateField(
-        null = True,
-        verbose_name = "Date Published"
-    )
-
-    # content
-    content = RichTextUploadingField()
-
-    # title
-    def __str__(self):
-        return self.title
-
 # Create class for current study listing
 class current_study(models.Model):
     class Meta:

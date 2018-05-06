@@ -46,17 +46,6 @@ class publicationadmin(admin.ModelAdmin):
     search_fields = ('title','container','date',)
     save_as = True
 
-# news item
-class newsitemadmin(admin.ModelAdmin):
-    ordering = ('title',)
-    fieldsets = (
-        ('News Post', {
-            'fields': ('title','pub_date','content',)
-        }),
-    )
-    search_fields = ('title',)
-    save_as = True
-
 # current study listing
 class currentstudyadmin(admin.ModelAdmin):
     ordering = ('title',)
@@ -108,7 +97,6 @@ class softwarelistingadmin(admin.ModelAdmin):
 # dlabsite models
 admin.site.register(lab_member, labmemberadmin)
 admin.site.register(publication, publicationadmin)
-admin.site.register(news_item, newsitemadmin)
 admin.site.register(current_study, currentstudyadmin)
 admin.site.register(data_listing, datalistingadmin)
 admin.site.register(software_listing, softwarelistingadmin)

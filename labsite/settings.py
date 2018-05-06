@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import dropbox
-import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,7 +32,7 @@ else: # Do these things when DEBUG is disabled
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_SSL_REDIRECT = True
 
-ALLOWED_HOSTS = ['grattonlabbackend.herokuapp.com','www.grattonlab.org','localhost']
+ALLOWED_HOSTS = ['greenelab.wustl.edu','localhost']
 
 # Application definition
 
@@ -91,13 +89,6 @@ DATABASES = {
         'NAME': 'test.db'
     }
 }
-# Use the DATABASE_URL env variable
-try:
-    if os.environ['PRODUCTION'] == "TRUE":
-        DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-        print('DATABASE has been set to heroku postgres.')
-except KeyError:
-    pass
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -134,21 +125,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-# Set Dropbox OAUTH TOKEN and file storage only if defined
-try:
-    # set the token
-    DROPBOX_OAUTH2_TOKEN = os.environ['DROPBOX_TOKEN']
-    # Set default file storage
-    DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-    # Set Dropbox Path
-    DROPBOX_ROOT_PATH = 'caterina-website'
-    STATIC_MEDIA = False
-except KeyError:
-    print('Dropbox token not defined!')
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-    STATIC_MEDIA = True
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+STATIC_MEDIA = True
 
 # Set ckeditor settings
 CKEDITOR_UPLOAD_PATH = 'uploads/'

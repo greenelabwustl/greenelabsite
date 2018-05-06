@@ -1,0 +1,171 @@
+{% extends "common/base.html" %}
+{% load staticfiles %}
+
+{% block head %}
+<link href="{% static 'common/css/research.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="grid-container full grid-frame">
+    <div class="grid-x">
+        <div class="cell small-12 parallax research-cover block1" style="color:white;">
+            <div class="grid-y grid-frame">
+                <div class="cell small-5"></div>
+                <div class="cell small-2">
+                    <h1 class="text-center">r e s e a r c h</h1>
+                </div>
+            </div>
+        </div>
+        <div class="cell small-8 small-offset-2 large-6 large-offset-3 research-text">
+            <p>The development of many human abilities, including cognitive,
+                motor, sensory, and social functions, are intricately linked.
+                Thus, a complete understanding of the development of one
+                function relies upon understanding its interactions with the
+                others. One way to study these interactions is to examine how
+                different parts of the brain communicate to support these
+                functions. Brain areas are organized into functional networks,
+                and the complex interactions within and among these networks
+                can reveal principles about the relationships among numerous
+                human abilities in both typical and atypical development.</p>
+            <p>Our lab uses the latest tools of cognitive neuroscience to study
+                the development of brain network organization and how it
+                supports cognitive and sensorimotor development. We use
+                multimodal MRI techniques to study typically and atypically
+                developing populations to accomplish our goals.</p>
+        </div>
+        <div class="cell small-12 parallax research-img1 block2" style="color:white;">
+            <div class="grid-y grid-frame">
+                <div class="cell small-5"></div>
+                <div class="cell small-2">
+                    <h1 class="text-center">Characterizing brain systems
+                        at the group level</h1>
+                </div>
+            </div>
+        </div>
+        <div class="cell small-8 small-offset-2 large-6 large-offset-3 research-text">
+            <p>Studying the whole brain, including the cortex, subcortex, and
+                cerebellum, is important for fully understanding the many
+                changes that occur over development and alterations seen in
+                developmental disorders. Therefore, we use a variety of
+                approaches, including resting-state fMRI and structural MRI,
+                to interrogate whole-brain function and structure. For example,
+                using resting-state fMRI we have identified an approach to best
+                capture cortico-subcortical functional connectivity and have
+                applied this approach to study its development.</p>
+        </div>
+        <div class="cell small-12 parallax research-img2 block3" style="color:white;">
+            <div class="grid-y grid-frame">
+                <div class="cell small-5"></div>
+                <div class="cell small-2">
+                    <h1 class="text-center">Predicting developmental
+                            outcomes</h1>
+                </div>
+            </div>
+        </div>
+        <div class="cell small-8 small-offset-2 large-6 large-offset-3 research-text">
+            <p>The ability to make predictions about individuals could lead to
+                improved outcomes. Therefore, we use whole-brain imaging data
+                and multivariate machine learning techniques to make such
+                predictions. We have shown successful prediction and
+                classification of known characteristics of individuals, such
+                as age and diagnosis, and our current work focuses on predicting
+                unknown characteristics with the goal of improving outcomes for
+                children.</p>
+        </div>
+        <div class="cell small-12 parallax research-img3 block4" style="color:white;">
+            <div class="grid-y grid-frame">
+                <div class="cell small-5"></div>
+                <div class="cell small-2">
+                    <h1 class="text-center">Characterizing brain systems
+                        at the individual level</h1>
+                </div>
+            </div>
+        </div>
+        <div class="cell small-8 small-offset-2 large-6 large-offset-3 research-text">
+            <p>Group-level studies are valuable, but we necessarily obscure
+                individual differences that contribute to each individual’s
+                uniqueness. Therefore, we also employ a highly-sampled
+                individual-level approach in which we collect large amounts of
+                high-quality imaging and behavioral data from each individual.
+                Using this approach, we can examine individual-specific brain
+                network organization, gaining insight into the distinctiveness
+                that makes up each individual.</p>
+        </div>
+        <div class="cell small-12 parallax research-img1 block5" style="color:white;">
+            <div class="grid-y grid-frame">
+                <div class="cell small-5"></div>
+                <div class="cell small-2">
+                    <h1 class="text-center">Tourette syndrome</h1>
+                </div>
+            </div>
+        </div>
+        <div class="cell small-8 small-offset-2 large-6 large-offset-3 research-text">
+            <p>Tourette syndrome (TS) is a fairly common neurodevelopmental
+                disorder characterized by motor and vocal tics. Though tics are
+                the defining symptoms, TS often involves atypical sensory,
+                cognitive, and social functioning as well. We use brain imaging,
+                cognitive, and clinical assessments to interrogate the
+                mechanisms underlying this complex disorder. We employ both
+                cross sectional and longitudinal designs to understand its
+                developmental trajectory with the goal of making clinically
+                relevant predictions about individual children with TS.</p>
+        </div>
+        <div class="cell small-12 parallax research-img2 block6" style="color:white;">
+            <div class="grid-y grid-frame">
+                <div class="cell small-5"></div>
+                <div class="cell small-2">
+                    <h1 class="text-center">Methods for improving MRI data
+                        quality</h1>
+                </div>
+            </div>
+        </div>
+        <div class="cell small-8 small-offset-2 large-6 large-offset-3 research-text">
+            <p>One of the major obstacles for MRI research, particularly in
+                pediatric populations, is excessive head movement in the
+                scanner. Even small amounts of motion can introduce systematic
+                distortions in the data. While data processing methods can
+                mitigate some of these effects, the most effective approaches
+                result in significant data loss. Thus, we aim to test and
+                improve strategies for reducing head motion in the scanner.
+                Our recent work has tested the effects of movie watching and
+                real-time motion feedback on in-scanner head motion in children.
+                We also employ real-time quality control using a newly developed
+                software, Framewise Integrated Real-Time MRI Monitoring
+                (FIRMM).</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function bgscroll(element,initialpos,percentmov) {
+    $(document).ready(function(){
+        var ypos = initialpos;
+        let inittop = document.documentElement.scrollTop || document.body.scrollTop;
+        $(element).css("background-position-y",`${inittop*percentmov+ypos}%`);
+        $(document).on('scroll',(event) => {
+            let delta = event.originalEvent.deltaY;
+            let scrolltype = ((delta>0)?'down':'up');
+            let top = document.documentElement.scrollTop || document.body.scrollTop;
+            // decision
+            if (scrolltype == 'down') {
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { return };
+            }
+            if (scrolltype == 'up') {
+                if (top == 0) { return };
+            }
+            let move = percentmov*top;
+            let newypos = ypos + move;
+            $(element).css("background-position-y",`${newypos}%`);
+        });
+    });
+}
+bgscroll('.block1',70,0.05);
+bgscroll('.block2',0,0.05);
+bgscroll('.block3',-80,0.05);
+bgscroll('.block4',-120,0.05);
+bgscroll('.block5',-170,0.05);
+bgscroll('.block6',-240,0.05);
+</script>
+{% endblock %}

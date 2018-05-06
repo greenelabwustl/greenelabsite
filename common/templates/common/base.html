@@ -1,0 +1,73 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="Lab webpage for the Greene Lab at Washington University in St. Louis School of Medicine">
+        <meta name="author" content="Andrew Van">
+        <link rel="icon" href="{% static 'common/img/favicon.ico' %}">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Greene Lab</title>
+        <link href="https://fonts.googleapis.com/css?family=Comfortaa:300" rel="stylesheet">
+        <link href="{% static 'common/css/foundation.css' %}" rel="stylesheet">
+        {% block head %}
+        {% endblock %}
+        <style>
+        .option {
+            margin: 0 100px 10px 30px;
+            border-top: none;
+        }
+        </style>
+    </head>
+    <body>
+        <div data-sticky-container></div>
+        <div class="sticky" style="z-index:300;" data-sticky data-margin-top="0">
+            <div class="title-bar" data-responsive-toggle="nav-menu" data-hide-for="Large" style="position:absolute;">
+                <div class="hamburger hamburger-custom" data-toggle="nav-menu">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class=sticky style="z-index:200;" data-sticky data-margin-top="0">
+            <div class="top-bar" id="nav-menu" data-animate="slide-in-left slide-out-left" style="height:100vh;width:max-content;position:absolute;display:none">
+                <div class="top-bar-left" style="height:100%;padding-top:75px;">
+                    <ul class="vertical menu" data-dropdown-menu>
+                        <li class="option"><a style="color: #0a0a0a;" href="{% url 'common:homepage' %}">home</a></li>
+                        <li class="option"><a style="color: #0a0a0a;" href="{% url 'common:people' %}">lab members</a></li>
+                        <li class="option"><a style="color: #0a0a0a;" href="{% url 'common:research' %}">research</a></li>
+                        <li class="option"><a style="color: #0a0a0a;" href="{% url 'common:publications' %}">publications</a></li>
+                        <li class="option"><a style="color: #0a0a0a;" href="{% url 'common:datasoftware' %}">data/software</a></li>
+                        <li class="option"><a style="color: #0a0a0a;" href="{% url 'common:directions' %}">directions</a></li>
+                        <li class="option"><a style="color: #0a0a0a;" href="https://dosenbachlab.wustl.edu/wiki/">wiki</a></li>
+                        <li class="option"><a style="color: #0a0a0a;" href="{% url 'common:contact' %}">contact</a></li>
+                    </ul>
+                </div>
+                <div class="top-bar-right">
+                </div>
+            </div>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+
+    <!-- Scripts -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+    <script src="{% static 'common/js/foundation.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            $(document).foundation();
+            $(".hamburger").click(function(){
+                $(this).toggleClass("is-active");
+            });
+        });
+    </script>
+    {% block scripts %}
+    {% endblock %}
+    </body>
+</html>
