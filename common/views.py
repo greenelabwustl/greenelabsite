@@ -23,6 +23,10 @@ def publications_page(request):
     years = [date.year for date in dateobjs]
     return render(request, 'common/publications.html',{'publications':publications,'years': years})
 
+def participate_page(request):
+    studies = current_study.objects.all()
+    return render(request, 'common/participate.html',{'studies': studies})
+
 # data/software
 def data_page(request):
     data = data_listing.objects.all().order_by('title')

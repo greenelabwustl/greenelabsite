@@ -1,0 +1,34 @@
+{% extends "common/base.html" %}
+{% load staticfiles %}
+
+{% block head %}
+<link href="{% static 'common/css/participate.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="grid-container full grid-frame color-bg pub-col">
+    <br><br>
+    <div class="grid-x">
+        <div class="cell small-8 small-offset-2">
+            <h1 class="text-center">p a r t i c i p a t e</h1>
+        </div>
+    </div>
+    <div class="grid-x">
+        {% for study in studies %}
+        <div class="cell small-8 small-offset-2 box">
+            <h4>{{ study.title }}</h4>
+            {% autoescape off %}
+            {{ study.description }}
+            {% endautoescape %}
+            <a target="_blank" href="{{ study.link }}"><button class="button">Join</button></a>
+            {% if study.flier %}
+            <a target="_blank" href="{{ study.flier.url }}"><button class="button alert">Flier</button></a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
