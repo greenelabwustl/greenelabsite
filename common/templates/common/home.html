@@ -12,6 +12,9 @@
         <div class="grid-y grid-frame align-center-middle primary main-block" style="height:100vh;background:#BFD8D2;overflow-x:hidden;">
             <div class="grid-container fluid canvas-container grid-frame"></div>
             <div id="rotator" style="height:100px;width:100px"></div>
+            <div style="position:absolute; z-index:100; top:1%; right:5%;">
+                <p class="help" style="font-size:3vmin;">hover over a region to see its label</p>
+            </div>
             <div style="position:absolute; z-index:100; bottom:5%; right:5%;">
                 <h4 class="region-display"></h4>
             </div>
@@ -81,7 +84,9 @@
 <script src="{% static 'common/js/foundation.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/92/three.min.js"></script>
 <script src="{% static 'common/js/OrbitControls.js' %}"></script>
-<script src="{% static 'common/js/colordict.js' %}"></script>
+<script src="{% static 'common/js/MSC06_networks_4k.js' %}"></script>
+<script src="{% static 'common/js/MSC06.L.pial.4k.js' %}"></script>
+<script src="{% static 'common/js/MSC06.R.pial.4k.js' %}"></script>
 <script>
 
 // Setup renderer
@@ -115,7 +120,7 @@ scene.add(light);
 
 // Setup camera
 var camera = new THREE.PerspectiveCamera(75,$('.main-block').width()/$('.main-block').height(),0.1,1000);
-camera.position.z = 130;
+camera.position.z = 170;
 var controls = new THREE.OrbitControls(camera);
 controls.dispose(); // disable controls
 controls.autoRotate = true;
@@ -133,28 +138,19 @@ function onMouseMove(event) {
 }
 window.addEventListener('mousemove',onMouseMove,false);
 
-// load geometries
-var loader = new THREE.JSONLoader();
-var left_pial; var right_pial;
-loader.load(
-    "https://cdn.rawgit.com/vanandrew/dglabsite/greene/static/dlabsite/js/left_pial.json",
-    function(geometry) {
-        left_pial = geometry;
-        scene.add(new THREE.Mesh(left_pial,new THREE.MeshLambertMaterial({vertexColors:THREE.VertexColors})));
-        loader.load(
-            "https://cdn.rawgit.com/vanandrew/dglabsite/greene/static/dlabsite/js/right_pial.json",
-            function(geometry) {
-                right_pial = geometry;
-                scene.add(new THREE.Mesh(right_pial,new THREE.MeshLambertMaterial({vertexColors:THREE.VertexColors})));
-                render_loop();
-            },
-            function(xhr) {},
-            function(err) { console.log(err); }
-        );
-    },
-    function(xhr) {},
-    function(err) { console.log(err); }
-);
+// Make pial geometry for each hemisphere
+var left_pial = make_pial_geometry(lhdata,'L');
+var right_pial = make_pial_geometry(rhdata,'R');
+left_pial.translate(20,0,0);
+right_pial.translate(20,0,0);
+material0 = new THREE.MeshLambertMaterial({
+    color: new THREE.Color( 0x808080 )
+});
+material1 = new THREE.MeshLambertMaterial({
+    vertexColors:THREE.VertexColors,
+});
+scene.add(new THREE.Mesh(left_pial,[material0,material1]));
+scene.add(new THREE.Mesh(right_pial,[material0,material1]));
 
 function render_loop() {
     // Render loop
@@ -171,18 +167,38 @@ function render() {
     raycaster.setFromCamera(mouse,camera);
     var intersects = raycaster.intersectObjects(scene.children);
     try {
-        var facecolor = intersects[0].face.vertexColors[0];
-        var red = Math.round(facecolor['r']*255);
-        var green = Math.round(facecolor['g']*255);
-        var blue = Math.round(facecolor['b']*255);
-        var region = colortable[red][green][blue].replace('ctx-lh-','').replace('ctx_lh_','');
-        $('.region-display').html(region);
+        var label = intersects[0].face.network;
+        $('.region-display').html(label);
+        // set regions with label to material 1
+        for (var i = 0; i < left_pial.faces.length; i++) {
+            if (left_pial.faces[i].network === label && state === 1) {
+                left_pial.faces[i].materialIndex = 1;
+            }
+            else { // everything else to 0
+                left_pial.faces[i].materialIndex = 0;
+            }
+        }
+        for (var i = 0; i < right_pial.faces.length; i++) {
+            if (right_pial.faces[i].network === label && state === 1) {
+                right_pial.faces[i].materialIndex = 1;
+            }
+            else { // everything else to 0
+                right_pial.faces[i].materialIndex = 0;
+            }
+        }
     }
-    catch (err) {}
+    catch (err) {
+        for (var i = 0; i < left_pial.faces.length; i++) {
+            left_pial.faces[i].materialIndex = 0;
+        }
+        for (var i = 0; i < right_pial.faces.length; i++) {
+            right_pial.faces[i].materialIndex = 0;
+        }
+    }
+    left_pial.groupsNeedUpdate = true;
+    right_pial.groupsNeedUpdate = true;
     renderer.render(scene,camera);
 }
-// render background first
-render();
 
 // resize renderer and camera on window resize
 $(window).resize(function() {
@@ -191,13 +207,69 @@ $(window).resize(function() {
     renderer.setSize($('.main-block').width(),$('.main-block').height());
 });
 
+render_loop();
+
+// Draw pial surface geometry
+function make_pial_geometry(pialdata,hemi) {
+    // Setup Geometry
+    var geometry = new THREE.Geometry();
+    for (var i = 0; i < pialdata.vertices.length; i++) {
+        // Define vertices
+        geometry.vertices.push(
+            new THREE.Vector3(
+                pialdata.vertices[i][1],
+                pialdata.vertices[i][2],
+                pialdata.vertices[i][0]
+            )
+        );
+    }
+    for (var i = 0; i < pialdata.faces.length; i++) {
+    	// get color for each vertex
+    	var color0 = colortable[hemi][pialdata.faces[i][0]]["Color"];
+    	var color1 = colortable[hemi][pialdata.faces[i][0]]["Color"];
+    	var color2 = colortable[hemi][pialdata.faces[i][0]]["Color"];
+        if (color0 === null) { color0 = [0.25,0.25,0.25]; }
+        if (color1 === null) { color1 = [0.25,0.25,0.25]; };
+        if (color2 === null) { color2 = [0.25,0.25,0.25]; };
+        // Define faces
+        geometry.faces.push(
+            new THREE.Face3(
+                pialdata.faces[i][1],
+                pialdata.faces[i][2],
+                pialdata.faces[i][0],
+                null,
+                [
+                    new THREE.Color(color1[0],color1[1],color1[2]),
+                    new THREE.Color(color2[0],color2[1],color2[2]),
+                    new THREE.Color(color0[0],color0[1],color0[2]),
+                ]
+            )
+        )
+        // assign network name to face
+        if (colortable[hemi][pialdata.faces[i][0]]["Network"] === null){
+            var name = 'N/A';
+        }
+        else {
+            var name = colortable[hemi][pialdata.faces[i][0]]["Network"];
+        }
+        geometry.faces[i].network = name;
+    }
+    // compute vertex and face normals
+    geometry.computeFaceNormals();
+    geometry.computeVertexNormals();
+    // return geometry
+    return geometry;
+}
+
 // enable/controls on click
 var state = 0;
 $('.region-display').hide();
+$('.help').hide();
 $("#interact").click(function(){
     if (state == 0) {
         $("#interact").html('back');
         $('.title-text').hide();
+        $('.help').show();
         $('.region-display').show();
         controls.autoRotate = false;
         controls.startagain();
@@ -206,6 +278,7 @@ $("#interact").click(function(){
     else if (state == 1) {
         $("#interact").html('interact');
         $('.title-text').show();
+        $('.help').hide();
         $('.region-display').hide();
         controls.dispose();
         state = 0;
