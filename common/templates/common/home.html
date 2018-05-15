@@ -143,19 +143,41 @@ function onMouseMove(event) {
 }
 window.addEventListener('mousemove',onMouseMove,false);
 
+// Define network names
+var networks = [
+    'Default',
+    'Visual',
+    'Fronto-parietal',
+    'Medial Visual',
+    'Dorsal Attention',
+    'Premotor',
+    'Ventral Attention',
+    'Salience',
+    'Cingulo-opercular',
+    'Hand Somatomotor',
+    'Mouth Somatomotor',
+    'Auditory',
+    'Medial Temporal Lobe',
+    'Posterior Medial Temporal Lobe',
+    'Parietal Memory',
+    'Context',
+    'Foot Somatomotor',
+    'Occipital Temporal Parietal',
+    'Unknown',
+    'No Label',
+    'None'
+]
+
 // Make pial geometry for each hemisphere
 var left_pial = make_pial_geometry(lhdata,'L');
 var right_pial = make_pial_geometry(rhdata,'R');
 left_pial.translate(20,0,0);
 right_pial.translate(20,0,0);
-material0 = new THREE.MeshLambertMaterial({
-    color: new THREE.Color( 0x808080 )
+material = new THREE.MeshLambertMaterial({
+    vertexColors: THREE.VertexColors
 });
-material1 = new THREE.MeshLambertMaterial({
-    vertexColors:THREE.VertexColors,
-});
-scene.add(new THREE.Mesh(left_pial,[material0,material1]));
-scene.add(new THREE.Mesh(right_pial,[material0,material1]));
+scene.add(new THREE.Mesh(left_pial,material));
+scene.add(new THREE.Mesh(right_pial,material));
 
 function render_loop() {
     // Render loop
@@ -168,40 +190,53 @@ function render_loop() {
 }
 
 // Render function
+var previousnet = '';
 function render() {
     raycaster.setFromCamera(mouse,camera);
     var intersects = raycaster.intersectObjects(scene.children);
-    try {
-        var label = intersects[0].face.network;
-        $('.region-display').html(label);
-        // set regions with label to material 1
-        for (var i = 0; i < left_pial.faces.length; i++) {
-            if (left_pial.faces[i].network === label && state === 1) {
-                left_pial.faces[i].materialIndex = 1;
-            }
-            else { // everything else to 0
-                left_pial.faces[i].materialIndex = 0;
-            }
+    if (state == 1) {
+        if ( intersects.length === 0 ) {
+            // if not already no network
+            if (previousnet !== 'None') {
+                // set color to no network
+                for (let i = 0; i < left_pial.faces.length; i++) {
+                    for (let c = 0; c < 3; c++) {
+                        left_pial.faces[i].vertexColors[c].copy(left_pial.faces[i].vtxcolor['None'][c]);
+                        right_pial.faces[i].vertexColors[c].copy(right_pial.faces[i].vtxcolor['None'][c]);
+                    }
+                }
+                // set display to blank
+                $('.region-display').html('');
+                // update colors
+                left_pial.colorsNeedUpdate = true;
+                right_pial.colorsNeedUpdate = true;
+                //set previousnet to none
+                previousnet = 'None';
+            }            
         }
-        for (var i = 0; i < right_pial.faces.length; i++) {
-            if (right_pial.faces[i].network === label && state === 1) {
-                right_pial.faces[i].materialIndex = 1;
-            }
-            else { // everything else to 0
-                right_pial.faces[i].materialIndex = 0;
+        else { // user hover over network
+            // get selected network
+            var label = intersects[0].face.network[0];
+            // if not already the same network
+            if (previousnet !== label) {
+                // set color to selected network
+                for (let i = 0; i < left_pial.faces.length; i++) {
+                    for (let c = 0; c < 3; c++) {
+                        left_pial.faces[i].vertexColors[c].copy(left_pial.faces[i].vtxcolor[label][c]);
+                        right_pial.faces[i].vertexColors[c].copy(right_pial.faces[i].vtxcolor[label][c]);
+                    }
+                }
+                // set display to blank
+                $('.region-display').html(label);
+                // update colors
+                left_pial.colorsNeedUpdate = true;
+                right_pial.colorsNeedUpdate = true;
+                //set previousnet to label
+                previousnet = label;
             }
         }
     }
-    catch (err) {
-        for (var i = 0; i < left_pial.faces.length; i++) {
-            left_pial.faces[i].materialIndex = 0;
-        }
-        for (var i = 0; i < right_pial.faces.length; i++) {
-            right_pial.faces[i].materialIndex = 0;
-        }
-    }
-    left_pial.groupsNeedUpdate = true;
-    right_pial.groupsNeedUpdate = true;
+    // render scene
     renderer.render(scene,camera);
 }
 
@@ -231,15 +266,24 @@ function make_pial_geometry(pialdata,hemi) {
             )
         );
     }
-    for (var i = 0; i < pialdata.faces.length; i++) {
+    for (let i = 0; i < pialdata.faces.length; i++) {
+        // define color and network name
+        var color = new Array(3);
+        var name = new Array(3);
+        
     	// get color for each vertex
-    	var color0 = colortable[hemi][pialdata.faces[i][0]]["Color"];
-    	var color1 = colortable[hemi][pialdata.faces[i][0]]["Color"];
-    	var color2 = colortable[hemi][pialdata.faces[i][0]]["Color"];
-        if (color0 === null) { color0 = [0.25,0.25,0.25]; }
-        if (color1 === null) { color1 = [0.25,0.25,0.25]; };
-        if (color2 === null) { color2 = [0.25,0.25,0.25]; };
-        // Define faces
+        for (let n = 0; n < 3; n++) {
+        	color[n] = colortable[hemi][pialdata.faces[i][n]]["Color"];
+            if (color[n] === null) { color[n] = [0.25,0.25,0.25]; }
+            name[n] = colortable[hemi][pialdata.faces[i][n]]["Network"];
+            if (name[n] === null) { name[n] = 'No Label' }
+        }
+        
+        // remap vertices to be in THREE.js order
+        color = remap(color);
+        name = remap(name);
+
+        // Define face and initialize to none color
         geometry.faces.push(
             new THREE.Face3(
                 pialdata.faces[i][1],
@@ -247,26 +291,49 @@ function make_pial_geometry(pialdata,hemi) {
                 pialdata.faces[i][0],
                 null,
                 [
-                    new THREE.Color(color1[0],color1[1],color1[2]),
-                    new THREE.Color(color2[0],color2[1],color2[2]),
-                    new THREE.Color(color0[0],color0[1],color0[2]),
+                    new THREE.Color(0.5,0.5,0.5),
+                    new THREE.Color(0.5,0.5,0.5),
+                    new THREE.Color(0.5,0.5,0.5)
                 ]
             )
         )
-        // assign network name to face
-        if (colortable[hemi][pialdata.faces[i][0]]["Network"] === null){
-            var name = 'N/A';
+
+        // set vtxcolor object
+        geometry.faces[i].vtxcolor = {};
+        // Set colors for each network
+        for (let n = 0; n < networks.length; n++) {
+            // set color array for network
+            geometry.faces[i].vtxcolor[networks[n]] = new Array(3);
+            for (let v = 0; v < 3; v++) {
+                // vertex is part of network                
+                if (networks[n] === name[v]) {
+                    // assign it the correct color
+                    geometry.faces[i].vtxcolor[networks[n]][v] = new THREE.Color(color[v][0],color[v][1],color[v][2]);
+                }
+                else { // vertex is not part of network
+                    // assign in the default gray color
+                    geometry.faces[i].vtxcolor[networks[n]][v] = new THREE.Color(0.5,0.5,0.5);
+                }  
+            }
         }
-        else {
-            var name = colortable[hemi][pialdata.faces[i][0]]["Network"];
-        }
+        
+        // set network name
         geometry.faces[i].network = name;
     }
     // compute vertex and face normals
     geometry.computeFaceNormals();
     geometry.computeVertexNormals();
+    
     // return geometry
     return geometry;
+}
+
+// three.js array vertex order
+function remap(array) {
+    two = array[0];
+    one = array[2];
+    zero = array[1];
+    return [zero,one,two];
 }
 
 // enable/controls on click
