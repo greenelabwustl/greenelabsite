@@ -8,8 +8,8 @@
 .pace {
     position: absolute;
 }
-.grid-x {
-    height: 100vh;
+.main-block {
+    height: 100vh !important;
 }
 .animation-block {
     height:100vh;
@@ -20,7 +20,7 @@
     position:absolute; z-index:100;
 }
 .home-block {
-    height:100vh;
+    height:100vh !important;
     -webkit-transition: background-color 0.5s ease-in-out;
     transition: background-color 0.5s ease-in-out;
 }
@@ -89,7 +89,7 @@
 {% block content %}
 <div class="grid-x">
     <div class="cell medium-12 large-12">
-        <div class="grid-y grid-frame align-center-middle primary main-block animation-block">
+        <div class="grid-y grid-frame align-center-middle main-block animation-block">
             <div class="grid-container fluid canvas-container grid-frame"></div>
             <div class="animation-ui" style="top:1%;right:5%;">
                 <p class="help" style="font-size:3vmin;">hover over a region to see its network label</p>
