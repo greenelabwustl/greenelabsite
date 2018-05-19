@@ -4,21 +4,97 @@
 {% block head %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
 <link href="{% static 'common/css/pace-theme-center-circle.min.css' %}" rel="stylesheet">
+<style>
+.pace {
+    position: absolute;
+}
+.animation-block {
+    height:100vh;
+    background:#BFD8D2;
+    overflow-x:hidden;
+}
+.animation-ui {
+    position:absolute; z-index:100;
+}
+.home-block {
+    height:100vh;
+    -webkit-transition: background-color 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out;
+}
+.home-block > h1 > a {
+    -webkit-transition: color 0.5s ease-in-out;
+    transition: color 0.5s ease-in-out;
+}
+.home-block:hover {
+    background-color: rgba(0,0,0,0.6) !important;
+}
+.home-block:hover > h1 > a {
+    color: #F4F4F4;
+}
+.home-block > .bg-block {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.home-block.lab-member > .bg-block {
+    background-position: center;
+    background-image: url("{% static 'common/img/people.png' %}");
+}
+.home-block.research > .bg-block {
+    background-position: center;
+    background-image: url("{% static 'common/img/allnetworks_MSC.png' %}");
+}
+.home-block.publications > .bg-block {
+    background-position: center;
+    background-size: contain;
+    background-image: url("{% static 'common/img/orange_cvr_caption.jpg' %}");
+}
+.home-block.participate > .bg-block {
+    background-position: center;
+    background-size: cover;
+    background-image: url("{% static 'common/img/jackiescanner.jpg' %}");
+}
+.home-block.data-software > .bg-block {
+    background-position: center;
+    background-image: url("{% static 'common/img/corrmat.png' %}");
+}
+.home-block.directions > .bg-block {
+    background-position: center;
+    background-size: cover;
+    background-image: url("{% static 'common/img/medical-school.jpg' %}");
+}
+.home-block.wiki > .bg-block {
+    background-position: left;
+    background-size: cover;
+    background-image: url("{% static 'common/img/wiki.png' %}");
+}
+.home-block.contact > .bg-block {
+    background-position: 40% 50%;
+    background-size: cover;
+    background-image: url("{% static 'common/img/featured.jpg' %}");
+}
+.home-text {
+    color: #222222;
+}
+.home-text:hover {
+    color: #222222;
+}
+</style>
 {% endblock %}
 
 {% block content %}
 <div class="grid-x">
     <div class="cell medium-12 large-12">
-        <div class="grid-y grid-frame align-center-middle primary main-block" style="height:100vh;background:#BFD8D2;overflow-x:hidden;">
+        <div class="grid-y grid-frame align-center-middle primary main-block animation-block">
             <div class="grid-container fluid canvas-container grid-frame"></div>
-            <div id="rotator" style="height:100px;width:100px"></div>
-            <div style="position:absolute; z-index:100; top:1%; right:5%;">
-                <p class="help" style="font-size:3vmin;">hover over a region to see its label</p>
+            <div class="animation-ui" style="top:1%;right:5%;">
+                <p class="help" style="font-size:3vmin;">hover over a region to see its network label</p>
             </div>
-            <div style="position:absolute; z-index:100; bottom:5%; right:5%;">
+            <div class="animation-ui" style="bottom:5%;right:5%;">
                 <h4 class="region-display"></h4>
             </div>
-            <div style="position:absolute; z-index:100; bottom:5%; left:5%;">
+            <div class="animation-ui" style="bottom:5%;left:5%;">
                 <p class="title-text" style="font-size:8vmin;">greene lab</p>
                 <a id="interact" class="button custom" style="font-size:3vmin;">interact</a>
             </div>
@@ -27,49 +103,57 @@
 </div>
 <div class="grid-x">
     <div class="cell medium-12 large-6">
-        <div class="grid-y grid-frame align-center-middle text-center primary" style="height:100vh;background:#F4F4F4;">
-            <h1><a style="color: black;" href="{% url 'common:people' %}">lab members</a></h1>
+        <div class="grid-y grid-frame align-center-middle text-center home-block lab-member" style="background-color:#85DCB0;">
+            <div class="bg-block"></div>
+            <h1><a class="home-text" href="{% url 'common:people' %}">lab members</a></h1>
         </div>
     </div>
     <div class="cell medium-12 large-6">
-        <div class="grid-y grid-frame align-center-middle text-center" style="height:100vh;background:#DCB239;">
-            <h1><a style="color: black;" href="{% url 'common:research' %}">research</a></h1>
-        </div>
-    </div>
-</div>
-<div class="grid-x">
-    <div class="cell medium-12 large-6">
-        <div class="grid-y grid-frame align-center-middle text-center" style="height:100vh;background:#FEDCD2;">
-            <h1><a style="color: black;" href="{% url 'common:publications' %}">publications</a></h1>
-        </div>
-    </div>
-    <div class="cell medium-12 large-6">
-        <div class="grid-y grid-frame align-center-middle text-center" style="height:100vh;background:#85DCB0;">
-            <h1><a style="color: black;" href="{% url 'common:participate' %}">participate</a></h1>
+        <div class="grid-y grid-frame align-center-middle text-center home-block research" style="background:#DCB239;">
+            <div class="bg-block"></div>
+            <h1><a class="home-text" href="{% url 'common:research' %}">research</a></h1>
         </div>
     </div>
 </div>
 <div class="grid-x">
     <div class="cell medium-12 large-6">
-        <div class="grid-y grid-frame align-center-middle text-center" style="height:100vh;background:#DF744A;">
-            <h1><a style="color: black;" href="{% url 'common:datasoftware' %}">data/software</a></h1>
+        <div class="grid-y grid-frame align-center-middle text-center home-block publications" style="background:#FEDCD2;">
+            <div class="bg-block"></div>
+            <h1><a class="home-text" href="{% url 'common:publications' %}">publications</a></h1>
         </div>
     </div>
     <div class="cell medium-12 large-6">
-        <div class="grid-y grid-frame align-center-middle text-center" style="height:100vh;background:#77C9D4;">
-            <h1><a style="color: black;" href="{% url 'common:directions' %}">directions</a></h1>
+        <div class="grid-y grid-frame align-center-middle text-center home-block participate" style="background:#E1B2C3;">
+            <div class="bg-block"></div>
+            <h1><a class="home-text" href="{% url 'common:participate' %}">participate</a></h1>
         </div>
     </div>
 </div>
 <div class="grid-x">
     <div class="cell medium-12 large-6">
-        <div class="grid-y grid-frame align-center-middle text-center" style="height:100vh;background:#4484CE;">
-            <h1><a style="color: black;" href="https://dosenbachlab.wustl.edu/wiki/">wiki</a></h1>
+        <div class="grid-y grid-frame align-center-middle text-center home-block data-software" style="background:#DF744A;">
+            <div class="bg-block"></div>
+            <h1><a class="home-text" href="{% url 'common:datasoftware' %}">data/software</a></h1>
         </div>
     </div>
     <div class="cell medium-12 large-6">
-        <div class="grid-y grid-frame align-center-middle text-center" style="height:100vh;background:#DCC7AA;">
-            <h1><a style="color: black;" href="{% url 'common:contact' %}">contact</a></h1>
+        <div class="grid-y grid-frame align-center-middle text-center home-block directions" style="background:#77C9D4;">
+            <div class="bg-block"></div>
+            <h1><a class="home-text" href="{% url 'common:directions' %}">directions</a></h1>
+        </div>
+    </div>
+</div>
+<div class="grid-x">
+    <div class="cell medium-12 large-6">
+        <div class="grid-y grid-frame align-center-middle text-center home-block wiki" style="background:#4484CE;">
+            <div class="bg-block"></div>
+            <h1><a class="home-text" href="https://dosenbachlab.wustl.edu/wiki/">wiki</a></h1>
+        </div>
+    </div>
+    <div class="cell medium-12 large-6">
+        <div class="grid-y grid-frame align-center-middle text-center home-block contact" style="background:#DCC7AA;">
+            <div class="bg-block"></div>
+            <h1><a class="home-text" href="{% url 'common:contact' %}">contact</a></h1>
         </div>
     </div>
 </div>
@@ -81,6 +165,7 @@
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
+<script>$('.region-display').hide();$('.help').hide();</script>
 <script src="{% static 'common/js/foundation.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/92/three.min.js"></script>
 <script src="{% static 'common/js/OrbitControls.js' %}"></script>
@@ -88,10 +173,6 @@
 <script src="https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/js/MSC06.L.pial.32k.js"></script>
 <script src="https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/js/MSC06.R.pial.32k.js"></script>
 <script>
-// Hide ui elements
-$('.region-display').hide();
-$('.help').hide();
-
 // Setup renderer
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize($('.main-block').width(),$('.main-block').height());
@@ -123,7 +204,7 @@ scene.add(light);
 
 // Setup camera
 var w = 8;
-var h = 7;
+var h = 7.25;
 var camera = new THREE.OrthographicCamera($('.main-block').width()/-w,$('.main-block').width()/w,$('.main-block').height()/h,$('.main-block').height()/-h,0.1,1000 );
 camera.position.z = 170;
 var controls = new THREE.OrbitControls(camera);
@@ -143,41 +224,21 @@ function onMouseMove(event) {
 }
 window.addEventListener('mousemove',onMouseMove,false);
 
-// Define network names
-var networks = [
-    'Default',
-    'Visual',
-    'Fronto-parietal',
-    'Medial Visual',
-    'Dorsal Attention',
-    'Premotor',
-    'Ventral Attention',
-    'Salience',
-    'Cingulo-opercular',
-    'Hand Somatomotor',
-    'Mouth Somatomotor',
-    'Auditory',
-    'Medial Temporal Lobe',
-    'Posterior Medial Temporal Lobe',
-    'Parietal Memory',
-    'Context',
-    'Foot Somatomotor',
-    'Occipital Temporal Parietal',
-    'Unknown',
-    'No Label',
-    'None'
-]
-
 // Make pial geometry for each hemisphere
 var left_pial = make_pial_geometry(lhdata,'L');
 var right_pial = make_pial_geometry(rhdata,'R');
-left_pial.translate(20,0,0);
-right_pial.translate(20,0,0);
-material = new THREE.MeshLambertMaterial({
+left_pial.translate(20,-10,0);
+right_pial.translate(20,-10,0);
+var material0 = new THREE.MeshLambertMaterial({
     vertexColors: THREE.VertexColors
 });
-scene.add(new THREE.Mesh(left_pial,material));
-scene.add(new THREE.Mesh(right_pial,material));
+var material1 = new THREE.MeshLambertMaterial({
+    vertexColors: THREE.VertexColors,
+    emissive: 0xFFFFFF,
+    emissiveIntensity: 0.125
+});
+scene.add(new THREE.Mesh(left_pial,[material0,material1]));
+scene.add(new THREE.Mesh(right_pial,[material0,material1]));
 
 function render_loop() {
     // Render loop
@@ -194,49 +255,38 @@ var previousnet = '';
 function render() {
     raycaster.setFromCamera(mouse,camera);
     var intersects = raycaster.intersectObjects(scene.children);
-    if (state == 1) {
-        if ( intersects.length === 0 ) {
-            // if not already no network
-            if (previousnet !== 'None') {
-                // set color to no network
-                for (let i = 0; i < left_pial.faces.length; i++) {
-                    for (let c = 0; c < 3; c++) {
-                        left_pial.faces[i].vertexColors[c].copy(left_pial.faces[i].vtxcolor['None'][c]);
-                        right_pial.faces[i].vertexColors[c].copy(right_pial.faces[i].vtxcolor['None'][c]);
-                    }
-                }
-                // set display to blank
-                $('.region-display').html('');
-                // update colors
-                left_pial.colorsNeedUpdate = true;
-                right_pial.colorsNeedUpdate = true;
-                //set previousnet to none
-                previousnet = 'None';
-            }            
+    try {
+        var label = intersects[0].face.network;
+        $('.region-display').html(label);
+        // set regions with label to material 1
+        for (var i = 0; i < left_pial.faces.length; i++) {
+            if (left_pial.faces[i].network === label && state === 1) {
+                left_pial.faces[i].materialIndex = 1;
+            }
+            else { // everything else to 0
+                left_pial.faces[i].materialIndex = 0;
+            }
         }
-        else { // user hover over network
-            // get selected network
-            var label = intersects[0].face.network[0];
-            // if not already the same network
-            if (previousnet !== label) {
-                // set color to selected network
-                for (let i = 0; i < left_pial.faces.length; i++) {
-                    for (let c = 0; c < 3; c++) {
-                        left_pial.faces[i].vertexColors[c].copy(left_pial.faces[i].vtxcolor[label][c]);
-                        right_pial.faces[i].vertexColors[c].copy(right_pial.faces[i].vtxcolor[label][c]);
-                    }
-                }
-                // set display to blank
-                $('.region-display').html(label);
-                // update colors
-                left_pial.colorsNeedUpdate = true;
-                right_pial.colorsNeedUpdate = true;
-                //set previousnet to label
-                previousnet = label;
+        for (var i = 0; i < right_pial.faces.length; i++) {
+            if (right_pial.faces[i].network === label && state === 1) {
+                right_pial.faces[i].materialIndex = 1;
+            }
+            else { // everything else to 0
+                right_pial.faces[i].materialIndex = 0;
             }
         }
     }
-    // render scene
+    catch (err) {
+        for (var i = 0; i < left_pial.faces.length; i++) {
+            left_pial.faces[i].materialIndex = 0;
+        }
+        for (var i = 0; i < right_pial.faces.length; i++) {
+            right_pial.faces[i].materialIndex = 0;
+        }
+        $('.region-display').html('');
+    }
+    left_pial.groupsNeedUpdate = true;
+    right_pial.groupsNeedUpdate = true;
     renderer.render(scene,camera);
 }
 
@@ -266,24 +316,15 @@ function make_pial_geometry(pialdata,hemi) {
             )
         );
     }
-    for (let i = 0; i < pialdata.faces.length; i++) {
-        // define color and network name
-        var color = new Array(3);
-        var name = new Array(3);
-        
+    for (var i = 0; i < pialdata.faces.length; i++) {
     	// get color for each vertex
-        for (let n = 0; n < 3; n++) {
-        	color[n] = colortable[hemi][pialdata.faces[i][n]]["Color"];
-            if (color[n] === null) { color[n] = [0.25,0.25,0.25]; }
-            name[n] = colortable[hemi][pialdata.faces[i][n]]["Network"];
-            if (name[n] === null) { name[n] = 'No Label' }
-        }
-        
-        // remap vertices to be in THREE.js order
-        color = remap(color);
-        name = remap(name);
-
-        // Define face and initialize to none color
+    	var color0 = colortable[hemi][pialdata.faces[i][0]]["Color"];
+    	var color1 = colortable[hemi][pialdata.faces[i][1]]["Color"];
+    	var color2 = colortable[hemi][pialdata.faces[i][2]]["Color"];
+        if (color0 === null) { color0 = [0.25,0.25,0.25]; }
+        if (color1 === null) { color1 = [0.25,0.25,0.25]; };
+        if (color2 === null) { color2 = [0.25,0.25,0.25]; };
+        // Define faces
         geometry.faces.push(
             new THREE.Face3(
                 pialdata.faces[i][1],
@@ -291,39 +332,24 @@ function make_pial_geometry(pialdata,hemi) {
                 pialdata.faces[i][0],
                 null,
                 [
-                    new THREE.Color(0.5,0.5,0.5),
-                    new THREE.Color(0.5,0.5,0.5),
-                    new THREE.Color(0.5,0.5,0.5)
+                    new THREE.Color(color1[0],color1[1],color1[2]),
+                    new THREE.Color(color2[0],color2[1],color2[2]),
+                    new THREE.Color(color0[0],color0[1],color0[2]),
                 ]
             )
         )
-
-        // set vtxcolor object
-        geometry.faces[i].vtxcolor = {};
-        // Set colors for each network
-        for (let n = 0; n < networks.length; n++) {
-            // set color array for network
-            geometry.faces[i].vtxcolor[networks[n]] = new Array(3);
-            for (let v = 0; v < 3; v++) {
-                // vertex is part of network                
-                if (networks[n] === name[v]) {
-                    // assign it the correct color
-                    geometry.faces[i].vtxcolor[networks[n]][v] = new THREE.Color(color[v][0],color[v][1],color[v][2]);
-                }
-                else { // vertex is not part of network
-                    // assign in the default gray color
-                    geometry.faces[i].vtxcolor[networks[n]][v] = new THREE.Color(0.5,0.5,0.5);
-                }  
-            }
+        // assign network name to face
+        if (colortable[hemi][pialdata.faces[i][0]]["Network"] === null){
+            var name = 'N/A';
         }
-        
-        // set network name
+        else {
+            var name = colortable[hemi][pialdata.faces[i][0]]["Network"];
+        }
         geometry.faces[i].network = name;
     }
     // compute vertex and face normals
     geometry.computeFaceNormals();
     geometry.computeVertexNormals();
-    
     // return geometry
     return geometry;
 }
@@ -353,6 +379,7 @@ $("#interact").click(function(){
         $('.title-text').show();
         $('.help').hide();
         $('.region-display').hide();
+        controls.autoRotate = true;
         controls.dispose();
         state = 0;
     }
