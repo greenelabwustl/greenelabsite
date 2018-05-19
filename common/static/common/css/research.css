@@ -10,16 +10,24 @@
     padding: 20px 0px;
 }
 .research-cover {
-    background-image: url("../img/research_cover.jpg");
+    background-image: url("https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/img/research_cover.jpg");
 }
 .research-img1 {
-    background-image: url("../img/img1.jpg");
+    background-image: url("https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/img/allnetworks_MSC.png");
+    background-repeat: repeat-y;
+    background-size: cover;
 }
 .research-img2 {
-    background-image: url("../img/img2.jpg");
+    background-image: url();
 }
 .research-img3 {
-    background-image: url("../img/img3.jpg");
+    background-image: url("https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/img/img3.jpg");
+}
+.research-img4 {
+    background-image: url("https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/img/TouretteKid.jpg");
+}
+.research-img5 {
+    background-image: url();
 }
 .white-text {
     color: #fdfdfd;
