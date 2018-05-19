@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="grid-container full grid-frame color-bg person-col">
+<div class="grid-container full grid-frame color-bg person-col responsive-text">
     <br><br>
     <div class="grid-x">
         <div class="cell small-8 small-offset-2">
@@ -15,16 +15,22 @@
     </div>
     <div class="grid-x">
         {% for person in members %}
-        <div class="cell small-8 small-offset-2 person-box">
+        <div class="cell small-10 small-offset-1 large-8 large-offset-2 person-box">
             <div class="grid-x">
-                <div class="cell small-2">
-                    {% if person.photo %}
-                    <img class="img-responsive" src="{{ person.photo.url }}">
-                    {% else %}
-                    <img class="img-responsive" src="{% static 'common/img/person-placeholder.jpg' %}">
-                    {% endif %}
+                <div class="cell small-8 small-offset-2 medium-4 medium-offset-4 large-3 large-offset-0">
+                    <div class="media-object">
+                        <div class="media-object-section">
+                            <div class="thumbnail">
+                                {% if person.photo %}
+                                <img style="max-width:100%;" src="{{ person.photo.url }}">
+                                {% else %}
+                                <img style="max-width:100%;" src="https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/img/person-placeholder.jpg">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="cell small-5 small-offset-1">
+                <div class="cell small-10 small-offset-1 large-8 large-offset-1">
                     <h4>{{ person.first_name }} {{ person.last_name }}</h4>
                     <p>{% if person.title %}Title: {{ person.title }}{% endif %} {% if person.title and person.email %}|{% endif %}
                        {% if person.email %}Email: {{ person.email }}{% endif %} {% if person.email and person.phone %}|{% endif %}

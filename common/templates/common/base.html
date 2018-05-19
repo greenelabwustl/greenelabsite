@@ -65,6 +65,7 @@
     <script src="{% static 'common/js/foundation.js' %}"></script>
     <script>$(document).ready(()=>{
         $(document).foundation();$(".hamburger").click(function(){$(this).toggleClass("is-active");});});
+        $('.responsive-text').flowtype({minimum:400,maximum:1000,minFont:6,maxFont:16,fontRatio:30});
     </script>
     {% block scripts %}
     {% endblock %}
