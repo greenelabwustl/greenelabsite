@@ -4,87 +4,10 @@
 {% block head %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
 <link href="{% static 'common/css/pace-theme-center-circle.min.css' %}" rel="stylesheet">
-<style>
-.pace {
-    position: absolute;
-}
-.main-block {
-    height: 100vh !important;
-}
-.animation-block {
-    height:100vh;
-    background:#BFD8D2;
-    overflow-x:hidden;
-}
-.animation-ui {
-    position:absolute; z-index:100;
-}
-.home-block {
-    height:100vh !important;
-    -webkit-transition: background-color 0.5s ease-in-out;
-    transition: background-color 0.5s ease-in-out;
-}
-.home-block > h1 > a {
-    -webkit-transition: color 0.5s ease-in-out;
-    transition: color 0.5s ease-in-out;
-}
-.home-block:hover {
-    background-color: rgba(0,0,0,0.6) !important;
-}
-.home-block:hover > h1 > a {
-    color: #F4F4F4;
-}
-.home-block > .bg-block {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
-.home-block.lab-member > .bg-block {
-    background-position: center;
-    background-image: url("https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/img/people.png");
-}
-.home-block.research > .bg-block {
-    background-position: center;
-    background-image: url("https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/img/allnetworks_MSC.png");
-}
-.home-block.publications > .bg-block {
-    background-position: center;
-    background-size: cover;
-    background-image: url("https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/img//orange_cvr_caption.jpg");
-}
-.home-block.participate > .bg-block {
-    background-position: center;
-    background-size: cover;
-    background-image: url("https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/img//jackiescanner.jpg");
-}
-.home-block.data-software > .bg-block {
-    background-position: center;
-    background-image: url("https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/img//corrmat.png");
-}
-.home-block.directions > .bg-block {
-    background-position: center;
-    background-size: cover;
-    background-image: url("https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/img/medical-school.jpg");
-}
-.home-block.wiki > .bg-block {
-    background-position: left;
-    background-size: cover;
-    background-image: url("https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/img//wiki.png");
-}
-.home-block.contact > .bg-block {
-    background-position: 40% 50%;
-    background-size: cover;
-    background-image: url("https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/img//featured.jpg");
-}
-.home-text {
-    color: #222222;
-}
-.home-text:hover {
-    color: #222222;
-}
-</style>
+<link href="{% static 'common/css/home.css' %}" rel="stylesheet">
 {% endblock %}
+
+{% block home %}active{% endblock %}
 
 {% block content %}
 <div class="grid-x">

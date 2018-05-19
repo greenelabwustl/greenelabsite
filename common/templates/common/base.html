@@ -11,15 +11,9 @@
         <title>Greene Lab</title>
         <link href="https://fonts.googleapis.com/css?family=Comfortaa:300" rel="stylesheet">
         <link href="{% static 'common/css/foundation.css' %}" rel="stylesheet">
+        <link href="{% static 'common/css/base.css' %}" rel="stylesheet">
         {% block head %}
         {% endblock %}
-        <style>
-        .option {
-            margin: 0 100px 10px 30px;
-            border-top: none;
-            font-size: 20px;
-        }
-        </style>
     </head>
     <body>
         <div data-sticky-container></div>
@@ -37,15 +31,15 @@
             <div class="top-bar" id="nav-menu" data-animate="slide-in-left slide-out-left" style="height:100vh;width:fit-content;position:absolute;display:none;padding:0px;">
                 <div class="top-bar-left" style="height:100%;padding-top:75px;">
                     <ul class="vertical menu" data-dropdown-menu>
-                        <li class="option"><a style="color: #0a0a0a;" href="{% url 'common:homepage' %}">home</a></li>
-                        <li class="option"><a style="color: #0a0a0a;" href="{% url 'common:people' %}">lab members</a></li>
-                        <li class="option"><a style="color: #0a0a0a;" href="{% url 'common:research' %}">research</a></li>
-                        <li class="option"><a style="color: #0a0a0a;" href="{% url 'common:participate' %}">participate</a></li>
-                        <li class="option"><a style="color: #0a0a0a;" href="{% url 'common:publications' %}">publications</a></li>
-                        <li class="option"><a style="color: #0a0a0a;" href="{% url 'common:datasoftware' %}">data/software</a></li>
-                        <li class="option"><a style="color: #0a0a0a;" href="{% url 'common:directions' %}">directions</a></li>
-                        <li class="option"><a style="color: #0a0a0a;" href="https://dosenbachlab.wustl.edu/wiki/">wiki</a></li>
-                        <li class="option"><a style="color: #0a0a0a;" href="{% url 'common:contact' %}">contact</a></li>
+                        <li class="option {% block home %}{% endblock %}"><a href="{% url 'common:homepage' %}">home</a></li>
+                        <li class="option {% block people %}{% endblock %}"><a href="{% url 'common:people' %}">lab members</a></li>
+                        <li class="option {% block research %}{% endblock %}"><a href="{% url 'common:research' %}">research</a></li>
+                        <li class="option {% block publications %}{% endblock %}"><a href="{% url 'common:publications' %}">publications</a></li>
+                        <li class="option {% block participate %}{% endblock %}"><a href="{% url 'common:participate' %}">participate</a></li>
+                        <li class="option {% block datasoftware %}{% endblock %}"><a href="{% url 'common:datasoftware' %}">data/software</a></li>
+                        <li class="option {% block directions %}{% endblock %}"><a href="{% url 'common:directions' %}">directions</a></li>
+                        <li class="option"><a href="https://dosenbachlab.wustl.edu/wiki/">wiki</a></li>
+                        <li class="option {% block contact %}{% endblock %}"><a href="{% url 'common:contact' %}">contact</a></li>
                     </ul>
                 </div>
                 <div class="top-bar-right">

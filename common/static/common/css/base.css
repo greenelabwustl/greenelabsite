@@ -1,0 +1,28 @@
+.menu .active > a {
+    background: #0a0a0a;
+    color: #F4F4F4;
+}
+.top-bar {
+    background-color: rgb(244,244,244,0.9);
+}
+.top-bar ul {
+    background-color: rgb(0,0,0,0);
+}
+.option {
+    margin: 0 100px 10px 30px;
+    border-top: none;
+    font-size: 20px;
+    -webkit-transition: background-color 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out;
+}
+.option > a {
+    color: #0a0a0a;
+    -webkit-transition: color 0.5s ease-in-out;
+    transition: color 0.5s ease-in-out;
+}
+.option:hover {
+    background-color: #0a0a0a;
+}
+.option:hover > a {
+    color: #F4F4F4;
+}
