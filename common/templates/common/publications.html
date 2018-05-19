@@ -25,7 +25,7 @@
                         <h4>{{ current_year }}</h4>
                         {% for pub in publications %}
                         {% if pub.date.year == current_year %}
-                        <p>{% autoescape off %}{{ pub.container }}{% endautoescape %}
+                        <p class="pubp">{% autoescape off %}{{ pub.container }}{% endautoescape %}
                             {% if pub.paper %}
                             [<a target="_blank" href="{{ pub.paper.url }}">PDF</a>]
                             {% endif %}
@@ -48,6 +48,7 @@
 {% endblock %}
 
 {% block scripts %}
+<script>window.sr = ScrollReveal();sr.reveal('#search,h1,h4,.pubp',{duration:1000},50);</script>
 <script src="https://cdn.rawgit.com/vdw/HideSeek/master/jquery.hideseek.min.js"></script>
 <script>$(document).ready(()=>{$('#search').hideseek({ignore:'h4',highlight: true});});</script>
 {% endblock %}
