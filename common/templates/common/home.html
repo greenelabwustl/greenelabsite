@@ -206,10 +206,10 @@ light.position.set(0,0,-300);
 scene.add(light);
 
 // Setup camera
-var w = 8;
-var h = 7.25;
-var camera = new THREE.OrthographicCamera($('.main-block').width()/-w,$('.main-block').width()/w,$('.main-block').height()/h,$('.main-block').height()/-h,0.1,1000 );
-camera.position.z = 170;
+var w = 0.925;
+var h = 1;
+var camera = new THREE.PerspectiveCamera(60,($('.main-block').width()*w)/($('.main-block').height()*h),0.1,1000);
+camera.position.z = 250;
 var controls = new THREE.OrbitControls(camera);
 controls.dispose(); // disable controls
 controls.autoRotate = true;
@@ -295,10 +295,7 @@ function render() {
 
 // resize renderer and camera on window resize
 $(window).resize(function() {
-    camera.left = $('.main-block').width()/-w;
-    camera.right = $('.main-block').width()/w;
-    camera.top = $('.main-block').height()/h;
-    camera.bottom = $('.main-block').height()/-h;
+    camera.aspect = ($('.main-block').width()*w)/($('.main-block').height()*h);
     camera.updateProjectionMatrix();
     renderer.setSize($('.main-block').width(),$('.main-block').height());
 });
