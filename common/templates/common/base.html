@@ -12,6 +12,15 @@
         <link href="https://fonts.googleapis.com/css?family=Comfortaa:300" rel="stylesheet">
         <link href="{% static 'common/css/foundation.css' %}" rel="stylesheet">
         <link href="{% static 'common/css/base.css' %}" rel="stylesheet">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-103586837-4"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-103586837-4');
+        </script>
         {% block head %}
         {% endblock %}
     </head>
