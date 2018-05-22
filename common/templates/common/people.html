@@ -35,7 +35,7 @@
                 <div class="cell small-10 small-offset-1 large-8 large-offset-1">
                     <h4>{{ person.first_name }} {{ person.last_name }}</h4>
                     <p>{% if person.title %}Title: {{ person.title }}{% endif %} {% if person.title and person.email %}|{% endif %}
-                       {% if person.email %}Email: {{ person.email }}{% endif %} {% if person.email and person.phone %}|{% endif %}
+                       {% if person.email %}Email: <a href="mailto:{{ person.email }}">{{ person.email }}</a>{% endif %} {% if person.email and person.phone %}|{% endif %}
                        {% if person.phone %}Phone: {{ person.phone }}{% endif %}</p>
                     {% autoescape off %}
                     {{ person.blurb }}
