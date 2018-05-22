@@ -11,6 +11,7 @@
 {% block home %}active{% endblock %}
 
 {% block content %}
+<!--Add arrow to scroll down-->
 <div class="grid-x">
     <div class="cell medium-12 large-12">
         <div class="grid-y grid-frame align-center-middle main-block animation-block">
@@ -136,7 +137,7 @@ var camera = new THREE.PerspectiveCamera(60,($('.main-block').width()*w)/($('.ma
 camera.position.z = 250;
 var controls = new THREE.OrbitControls(camera);
 controls.dispose(); // disable controls
-controls.autoRotate = false;
+controls.autoRotate = true;
 controls.enablePan = false;
 controls.enableKeys = false;
 
@@ -209,7 +210,7 @@ function render() {
         }
         for (var i = 0; i < right_pial.faces.length; i++) {
             right_pial.faces[i].materialIndex = 0;
-        }
+        }314-362-4154
         $('.region-display').html('');
     }
     left_pial.groupsNeedUpdate = true;
@@ -292,18 +293,14 @@ $("#interact").click(function(){
     if (state == 0) {
         $("#interact").html('back');
         $('.title-text').hide();
-        $('.help').show();
         $('.region-display').show();
-        controls.autoRotate = false;
         controls.startagain();
         state = 1;
     }
     else if (state == 1) {
         $("#interact").html('interact');
         $('.title-text').show();
-        $('.help').hide();
         $('.region-display').hide();
-        controls.autoRotate = true;
         controls.dispose();
         state = 0;
     }
