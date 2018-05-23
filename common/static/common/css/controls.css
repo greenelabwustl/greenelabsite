@@ -1,0 +1,19 @@
+.dg.ac {
+    position: absolute !important;
+}
+.close-button {
+    font-size: 10px;
+    position: inherit !important;
+}
+.c > div > input {
+    font-size: 10px;
+    height: 100%;
+}
+#scrolldown {
+    -webkit-transition: color 0.5s ease-in-out;
+    transition: color 0.5s ease-in-out;
+}
+#scrolldown:hover {
+    cursor: pointer;
+    color: #F4F4F4;
+}

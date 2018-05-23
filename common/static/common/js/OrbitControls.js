@@ -13,6 +13,8 @@
 //    Zoom - middle mouse, or mousewheel / touch: two finger spread or squish
 //    Pan - right mouse, or arrow keys / touch: three finger swipe
 
+/* Modified by Andrew Van (2018) */
+
 THREE.OrbitControls = function ( object, domElement ) {
 
 	this.object = object;
@@ -218,9 +220,9 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	this.dispose = function () {
 
-		scope.domElement.removeEventListener( 'contextmenu', onContextMenu, false );
+		//scope.domElement.removeEventListener( 'contextmenu', onContextMenu, false );
 		scope.domElement.removeEventListener( 'mousedown', onMouseDown, false );
-		scope.domElement.removeEventListener( 'wheel', onMouseWheel, false );
+		//scope.domElement.removeEventListener( 'wheel', onMouseWheel, false );
 
 		scope.domElement.removeEventListener( 'touchstart', onTouchStart, false );
 		scope.domElement.removeEventListener( 'touchend', onTouchEnd, false );
@@ -237,10 +239,10 @@ THREE.OrbitControls = function ( object, domElement ) {
 
     this.startagain = function () {
 
-        scope.domElement.addEventListener( 'contextmenu', onContextMenu, false );
+        //scope.domElement.addEventListener( 'contextmenu', onContextMenu, false );
 
     	scope.domElement.addEventListener( 'mousedown', onMouseDown, false );
-    	scope.domElement.addEventListener( 'wheel', onMouseWheel, false );
+    	//scope.domElement.addEventListener( 'wheel', onMouseWheel, false );
 
     	scope.domElement.addEventListener( 'touchstart', onTouchStart, false );
     	scope.domElement.addEventListener( 'touchend', onTouchEnd, false );
@@ -911,10 +913,10 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	//
 
-	scope.domElement.addEventListener( 'contextmenu', onContextMenu, false );
+	//scope.domElement.addEventListener( 'contextmenu', onContextMenu, false );
 
 	scope.domElement.addEventListener( 'mousedown', onMouseDown, false );
-	scope.domElement.addEventListener( 'wheel', onMouseWheel, false );
+	//scope.domElement.addEventListener( 'wheel', onMouseWheel, false );
 
 	scope.domElement.addEventListener( 'touchstart', onTouchStart, false );
 	scope.domElement.addEventListener( 'touchend', onTouchEnd, false );
