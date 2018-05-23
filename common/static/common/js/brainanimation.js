@@ -39,7 +39,7 @@ controls.enablePan = false;
 controls.enableKeys = false;
 
 // Setup gui
-var gui = new dat.GUI({'width': 300});
+var gui = new dat.GUI({'width': 280});
 var folder = gui.addFolder('Settings');
 folder.add(camera,'zoom',0.5,2,0.01);
 folder.add(controls,'autoRotate');
