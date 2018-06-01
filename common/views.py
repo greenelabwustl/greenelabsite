@@ -9,7 +9,7 @@ def home_page(request):
 # lab member page
 def people_page(request):
     # Get all lab members
-    members = lab_member.objects.all().order_by('last_name')
+    members = lab_member.objects.all().order_by('position')
     return render(request, 'common/people.html', {'members': members})
 
 # research

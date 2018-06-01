@@ -9,6 +9,7 @@ class labmemberadmin(admin.ModelAdmin):
     fieldsets = (
         ('Lab Member Data', {
             'fields': (
+                'position',
                 'first_name',
                 'last_name',
                 'email',

@@ -63,10 +63,17 @@ class lab_member(models.Model):
 
     # Cv of lab member
     cv = models.FileField(
-        upload_to='cv/',
+        upload_to = 'cv/',
         null = True,
         blank = True,
         verbose_name = "CV"
+    )
+
+    # set position of member
+    position = models.IntegerField(
+        unique = True,
+        null = True,
+        verbose_name = "Position"
     )
 
     # Return the name of the model
