@@ -142,11 +142,11 @@
 {% block scripts %}
 <script>window.sr = ScrollReveal();sr.reveal('.research-head,.research-text',{duration:1000},50);</script>
 <script>
-function bgscroll(element,initialpos,percentmov) {
+function bgscroll(element,initialpos,percentmov,posrel) {
     $(document).ready(()=>{
         var ypos = initialpos;
         let inittop = document.documentElement.scrollTop || document.body.scrollTop;
-        $(element).css("background-position-y",`${inittop*percentmov+ypos}%`);
+        $(element).css("background-position",`${posrel} ${inittop*percentmov+ypos}% left 50%`);
         $(document).on('scroll',(event)=>{
             let scrolltype = ((event.originalEvent.deltaY>0)?'down':'up');
             let top = document.documentElement.scrollTop || document.body.scrollTop;
@@ -157,15 +157,16 @@ function bgscroll(element,initialpos,percentmov) {
             if (scrolltype == 'up') {
                 if (top == 0) { return };
             }
-            $(element).css("background-position-y",`${ypos+percentmov*top}%`);
+            $(element).css("background-position",`${posrel} ${ypos+percentmov*top}% left 50%`);
         });
     });
 }
-bgscroll('.block1',70,0.05);
-bgscroll('.block2',-10,0.05);
-bgscroll('.block3',-90,0.05);
-bgscroll('.block4',-130,0.05);
-bgscroll('.block5',-160,0.05);
-bgscroll('.block6',-240,0.05);
+let scrollrate = 0.002;
+bgscroll('.block1',25,scrollrate,'bottom');
+bgscroll('.block2',0,scrollrate,'bottom');
+bgscroll('.block3',50,scrollrate,'bottom');
+bgscroll('.block4',35,scrollrate,'top');
+bgscroll('.block5',10,scrollrate,'bottom');
+bgscroll('.block6',35,scrollrate,'bottom');
 </script>
 {% endblock %}
