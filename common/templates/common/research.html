@@ -135,6 +135,9 @@
                 software, Framewise Integrated Real-Time MRI Monitoring
                 (FIRMM).</p>
         </div>
+        <div>
+            <p id='test'></p>
+        </div>
     </div>
 </div>
 {% endblock %}
@@ -158,6 +161,7 @@ if (navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i)) 
     bgscroll('.block4',35,'top');
     bgscroll('.block5',10,'bottom');
     bgscroll('.block6',35,'bottom');
+    $('#test').html('test');
 }
 else {
     function bgscroll(element,initialpos,percentmov,posrel) {
