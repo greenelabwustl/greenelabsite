@@ -149,7 +149,7 @@ if (navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i)) 
         $(document).ready(()=>{
             var ypos = initialpos;
             let inittop = document.documentElement.scrollTop || document.body.scrollTop;
-            $(element).css("background-position",`50% ${posrel} ${inittop*percentmov+ypos}%`);
+            $(element).css("background-position",`50% ${inittop*percentmov+ypos}%`);
         });
     }
     bgscroll('.block1',25,'bottom');
