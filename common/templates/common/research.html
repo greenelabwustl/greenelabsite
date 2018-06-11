@@ -142,24 +142,29 @@
 {% block scripts %}
 <script>window.sr = ScrollReveal();sr.reveal('.research-head,.research-text',{duration:1000},50);</script>
 <script>
-function bgscroll(element,initialpos,percentmov,posrel) {
-    $(document).ready(()=>{
-        var ypos = initialpos;
-        let inittop = document.documentElement.scrollTop || document.body.scrollTop;
-        $(element).css("background-position",`${posrel} ${inittop*percentmov+ypos}% left 50%`);
-        $(document).on('scroll',(event)=>{
-            let scrolltype = ((event.originalEvent.deltaY>0)?'down':'up');
-            let top = document.documentElement.scrollTop || document.body.scrollTop;
-            // decision
-            if (scrolltype == 'down') {
-                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { return };
-            }
-            if (scrolltype == 'up') {
-                if (top == 0) { return };
-            }
-            $(element).css("background-position",`${posrel} ${ypos+percentmov*top}% left 50%`);
+if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+    console.log('Disabling Scroll on Safari!');
+}
+else {
+    function bgscroll(element,initialpos,percentmov,posrel) {
+        $(document).ready(()=>{
+            var ypos = initialpos;
+            let inittop = document.documentElement.scrollTop || document.body.scrollTop;
+            $(element).css("background-position",`${posrel} ${inittop*percentmov+ypos}% left 50%`);
+            $(document).on('scroll',(event)=>{
+                let scrolltype = ((event.originalEvent.deltaY>0)?'down':'up');
+                let top = document.documentElement.scrollTop || document.body.scrollTop;
+                // decision
+                if (scrolltype == 'down') {
+                    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { return };
+                }
+                if (scrolltype == 'up') {
+                    if (top == 0) { return };
+                }
+                $(element).css("background-position",`${posrel} ${ypos+percentmov*top}% left 50%`);
+            });
         });
-    });
+    }
 }
 let scrollrate = 0.002;
 bgscroll('.block1',25,scrollrate,'bottom');
