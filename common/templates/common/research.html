@@ -149,16 +149,9 @@ if (navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i)) 
         $(document).ready(()=>{
             var ypos = initialpos;
             let inittop = document.documentElement.scrollTop || document.body.scrollTop;
-            $(element).css("background-position",`${posrel} ${ypos}% left 50%`);
+            $(element).css("background-position",`100vmax auto`);
         });
     }
-    let scrollrate = 0.002;
-    bgscroll2('.block1',25,scrollrate,'bottom');
-    bgscroll2('.block2',0,scrollrate,'bottom');
-    bgscroll2('.block3',40,scrollrate,'bottom');
-    bgscroll2('.block4',-5,scrollrate,'top');
-    bgscroll2('.block5',5,scrollrate,'bottom');
-    bgscroll2('.block6',35,scrollrate,'bottom');
 }
 else {
     function bgscroll(element,initialpos,percentmov,posrel) {
