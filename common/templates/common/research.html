@@ -142,8 +142,8 @@
 {% block scripts %}
 <script>window.sr = ScrollReveal();sr.reveal('.research-head,.research-text',{duration:1000},50);</script>
 <script>
-if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
-    console.log('Disabling Scroll on Safari!');
+if (navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i)) {
+    // This is to disable scroll on mobile safari
 }
 else {
     function bgscroll(element,initialpos,percentmov,posrel) {
@@ -165,13 +165,13 @@ else {
             });
         });
     }
+    let scrollrate = 0.002;
+    bgscroll('.block1',25,scrollrate,'bottom');
+    bgscroll('.block2',0,scrollrate,'bottom');
+    bgscroll('.block3',40,scrollrate,'bottom');
+    bgscroll('.block4',35,scrollrate,'top');
+    bgscroll('.block5',10,scrollrate,'bottom');
+    bgscroll('.block6',35,scrollrate,'bottom');
+    </script>
 }
-let scrollrate = 0.002;
-bgscroll('.block1',25,scrollrate,'bottom');
-bgscroll('.block2',0,scrollrate,'bottom');
-bgscroll('.block3',40,scrollrate,'bottom');
-bgscroll('.block4',35,scrollrate,'top');
-bgscroll('.block5',10,scrollrate,'bottom');
-bgscroll('.block6',35,scrollrate,'bottom');
-</script>
 {% endblock %}
