@@ -148,7 +148,7 @@ if (navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i)) 
     function bgscroll2(element,repeat) {
         $(document).ready(()=>{
             $(element).css("background-position",`100vmax -25%`);
-            if !(repeat) {
+            if (!repeat) {
                 $(element).css("background-repeat",`no-repeat`);
             }
             $(element).css("background-attachment",`scroll`);
