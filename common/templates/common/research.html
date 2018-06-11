@@ -149,15 +149,15 @@ if (navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i)) 
         $(document).ready(()=>{
             var ypos = initialpos;
             let inittop = document.documentElement.scrollTop || document.body.scrollTop;
-            $(element).css("background-position",`50% ${inittop*percentmov+ypos}%`);
+            $(element).css("background-position",`75% ${inittop*percentmov+ypos}%`);
         });
     }
-    bgscroll('.block1',25,'bottom');
-    bgscroll('.block2',0,'bottom');
-    bgscroll('.block3',40,'bottom');
-    bgscroll('.block4',35,'top');
-    bgscroll('.block5',10,'bottom');
-    bgscroll('.block6',35,'bottom');
+    bgscroll('.block1',0);
+    bgscroll('.block2',0);
+    bgscroll('.block3',0);
+    bgscroll('.block4',0);
+    bgscroll('.block5',0);
+    bgscroll('.block6',0);
 }
 else {
     function bgscroll(element,initialpos,percentmov,posrel) {
