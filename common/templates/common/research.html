@@ -145,13 +145,19 @@
 if (navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i)) {
     // This is to disable scroll on mobile safari
     // But initialize position to be correct
-    function bgscroll2(element,initialpos,percentmov,posrel) {
+    function bgscroll2(element) {
         $(document).ready(()=>{
-            var ypos = initialpos;
-            let inittop = document.documentElement.scrollTop || document.body.scrollTop;
             $(element).css("background-position",`100vmax auto`);
+            $(element).css("background-repeat",`no-repeat`);
+            $(element).css("background-attachment",`scroll`);
         });
     }
+    bgscroll2('.block1');
+    bgscroll2('.block2');
+    bgscroll2('.block3');
+    bgscroll2('.block4');
+    bgscroll2('.block5');
+    bgscroll2('.block6');
 }
 else {
     function bgscroll(element,initialpos,percentmov,posrel) {
