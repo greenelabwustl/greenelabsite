@@ -142,7 +142,7 @@
 {% block scripts %}
 <script>window.sr = ScrollReveal();sr.reveal('.research-head,.research-text',{duration:1000},50);</script>
 <script>
-if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
     console.log('Disabling Scroll on Safari!');
 }
 else {
