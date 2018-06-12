@@ -8,7 +8,22 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#BFD8D2">
-        <title>Greene Lab</title>
+        <title>Greene Lab | {% block pagename %}{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+        <script>
+        window.addEventListener("load", function(){
+        window.cookieconsent.initialise({
+          "palette": {
+            "popup": {
+              "background": "#000"
+            },
+            "button": {
+              "background": "#f1d600"
+            }
+          }
+        })});
+        </script>
         <link href="https://fonts.googleapis.com/css?family=Comfortaa:300" rel="stylesheet">
         <link href="{% static 'common/css/foundation.css' %}" rel="stylesheet">
         <link href="{% static 'common/css/base.css' %}" rel="stylesheet">
