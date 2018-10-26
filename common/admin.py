@@ -17,6 +17,7 @@ class labmemberadmin(admin.ModelAdmin):
                 'title',
                 'blurb',
                 'alumni',
+                'trainees',
                 'photo',
                 'cv'
             )

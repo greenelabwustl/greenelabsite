@@ -53,6 +53,11 @@ class lab_member(models.Model):
         verbose_name = "Lab Alumni"
     )
 
+    # Define if member is trainees
+    trainees = models.BooleanField(
+        verbose_name = "Other Trainees"
+    )
+
     # Photo of lab member
     photo = models.ImageField(
         upload_to='portraits/',

@@ -15,10 +15,71 @@
     <div class="grid-x">
         <div class="cell small-10 small-offset-1">
             <h1 class="text-center">l a b&nbsp;&nbsp;&nbsp;&nbsp;m e m b e r s</h1>
+            <img class="group-img img-responsive" src="{% static 'common/img/Greene_Lab.jpg' %}">
         </div>
     </div>
     <div class="grid-x">
         {% for person in members %}
+        <div class="cell small-10 small-offset-1 large-8 large-offset-2 person-box">
+            <div class="grid-x">
+                <div class="cell small-8 small-offset-2 medium-4 medium-offset-4 large-3 large-offset-0">
+                    <div class="media-object">
+                        <div class="media-object-section">
+                            <div class="thumbnail">
+                                {% if person.photo %}
+                                <img style="max-width:100%;" src="{{ person.photo.url }}">
+                                {% else %}
+                                <img style="max-width:100%;" src="https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/img/person-placeholder.jpg">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell small-10 small-offset-1 large-8 large-offset-1">
+                    <h4>{{ person.first_name }} {{ person.last_name }}</h4>
+                    <p>{% if person.title %}Title: {{ person.title }}{% endif %} {% if person.title and person.email %}|{% endif %}
+                       {% if person.email %}Email: <a href="mailto:{{ person.email }}">{{ person.email }}</a>{% endif %} {% if person.email and person.phone %}|{% endif %}
+                       {% if person.phone %}Phone: {{ person.phone }}{% endif %}</p>
+                    {% autoescape off %}
+                    {{ person.blurb }}
+                    {% endautoescape %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <h4> Other Trainees </h4>
+        {% for person in trainees %}
+        <div class="cell small-10 small-offset-1 large-8 large-offset-2 person-box">
+            <div class="grid-x">
+                <div class="cell small-8 small-offset-2 medium-4 medium-offset-4 large-3 large-offset-0">
+                    <div class="media-object">
+                        <div class="media-object-section">
+                            <div class="thumbnail">
+                                {% if person.photo %}
+                                <img style="max-width:100%;" src="{{ person.photo.url }}">
+                                {% else %}
+                                <img style="max-width:100%;" src="https://cdn.rawgit.com/greenelabwustl/greenelabsite/greene/common/static/common/img/person-placeholder.jpg">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell small-10 small-offset-1 large-8 large-offset-1">
+                    <h4>{{ person.first_name }} {{ person.last_name }}</h4>
+                    <p>{% if person.title %}Title: {{ person.title }}{% endif %} {% if person.title and person.email %}|{% endif %}
+                       {% if person.email %}Email: <a href="mailto:{{ person.email }}">{{ person.email }}</a>{% endif %} {% if person.email and person.phone %}|{% endif %}
+                       {% if person.phone %}Phone: {{ person.phone }}{% endif %}</p>
+                    {% autoescape off %}
+                    {{ person.blurb }}
+                    {% endautoescape %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <h4> Lab Alumni </h4>
+        {% for person in alumni %}
         <div class="cell small-10 small-offset-1 large-8 large-offset-2 person-box">
             <div class="grid-x">
                 <div class="cell small-8 small-offset-2 medium-4 medium-offset-4 large-3 large-offset-0">

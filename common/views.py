@@ -9,8 +9,10 @@ def home_page(request):
 # lab member page
 def people_page(request):
     # Get all lab members
-    members = lab_member.objects.all().order_by('position')
-    return render(request, 'common/people.html', {'members': members})
+    members = lab_member.objects.all().exclude(alumni=True).exclude(trainees=True).order_by('position')
+    alumni = lab_member.objects.all().filter(alumni=True).order_by('position')
+    trainees = lab_member.objects.all().filter(trainees=True).order_by('position')
+    return render(request, 'common/people.html', {'members': members, 'alumni': alumni, 'trainees': trainees})
 
 # research
 def research_page(request):

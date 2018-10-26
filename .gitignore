@@ -103,6 +103,10 @@ ENV/
 # sqlite
 *.db
 db.sqlite3
+backup.sqlite3
+
+# .DS_Store
+.DS_Store
 
 # media
 /media
