@@ -35,6 +35,10 @@ def data_page(request):
     software = software_listing.objects.all().order_by('title')
     return render(request, 'common/data_software.html', {'data': data, 'software': software})
 
+# jobs
+def jobs_page(request):
+    return render(request, 'common/join_us.html')
+
 # directions
 def directions_page(request):
     return render(request, 'common/directions.html')
