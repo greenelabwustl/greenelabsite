@@ -37,7 +37,8 @@ def data_page(request):
 
 # jobs
 def jobs_page(request):
-    return render(request, 'common/join_us.html')
+    jobpostings = job_listing.objects.all().order_by('-post_date')
+    return render(request, 'common/join_us.html', {'jobpostings': jobpostings})
 
 # directions
 def directions_page(request):
