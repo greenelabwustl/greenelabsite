@@ -1,3 +1,9 @@
+.job-box {
+    padding: 20px 20px 20px 20px;
+    margin: 20px auto 20px auto;
+    background-color: rgba(34,34,34,0.15);
+    border-radius: 5px;
+}
 .color-bg {
     background-color: #BFD8D2;
 }
