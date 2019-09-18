@@ -180,7 +180,7 @@ class job_listing(models.Model):
         verbose_name = "Description"
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title + " - " + str(self.jobid)
 
 # Create class for current study listing
