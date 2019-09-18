@@ -48,6 +48,21 @@ class publicationadmin(admin.ModelAdmin):
     search_fields = ('title','container','date',)
     save_as = True
 
+# admin for job listing
+class joblistingadmin(admin.ModelAdmin):
+    ordering = ('-post_date',)
+    fieldsets = (
+        ('Job Listing', {
+            'fields': (
+                'title',
+                'jobid',
+                'description',
+            )
+        }),
+    )
+    search_fields = ('title','jobid',)
+    save_as = True
+
 # current study listing
 class currentstudyadmin(admin.ModelAdmin):
     ordering = ('title',)
@@ -99,6 +114,7 @@ class softwarelistingadmin(admin.ModelAdmin):
 # dlabsite models
 admin.site.register(lab_member, labmemberadmin)
 admin.site.register(publication, publicationadmin)
+admin.site.register(job_listing, joblistingadmin)
 admin.site.register(current_study, currentstudyadmin)
 admin.site.register(data_listing, datalistingadmin)
 admin.site.register(software_listing, softwarelistingadmin)
