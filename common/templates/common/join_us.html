@@ -30,21 +30,28 @@
         </div>
     </div>
     <br>
-    <div class="grid-x">
-        {% for job in jobpostings %}
-        <div class="cell small-10 small-offset-1 large-8 large-offset-2 job-box">
-            <div class="panel panel-default">
-                <div class="panel-heading"><h4>{{job.title}} - {{job.jobid}}</h4></div>
-                <div class="panel-body">
-                    {% autoescape off %}
-                    {{job.description}}
-                    {% endautoescape %}
-                    <a class="btn btn-primary" target="_blank" href="https://jobs.wustl.edu/psc/APPLHRMS/EMPLOYEE/HRMS/c/HRS_HRAM.HRS_APP_SCHJOB.GBL?Page=HRS_APP_JBPST&REL_ACTION=Yes&SiteId=1&HRS_JO_PST_TYPE=E&HRS_JOB_OPENING_ID={{job.jobid}}&HRS_JO_PST_SEQ=1">Apply Here</a>
+    {% if jobpostings %}
+        <div class="grid-x">
+            {% for job in jobpostings %}
+            <div class="cell small-10 small-offset-1 large-8 large-offset-2 job-box">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h4>{{job.title}} - {{job.jobid}}</h4></div>
+                    <div class="panel-body">
+                        {% autoescape off %}
+                        {{job.description}}
+                        {% endautoescape %}
+                        <a class="btn btn-primary" target="_blank" href="https://jobs.wustl.edu/psc/APPLHRMS/EMPLOYEE/HRMS/c/HRS_HRAM.HRS_APP_SCHJOB.GBL?Page=HRS_APP_JBPST&REL_ACTION=Yes&SiteId=1&HRS_JO_PST_TYPE=E&HRS_JOB_OPENING_ID={{job.jobid}}&HRS_JO_PST_SEQ=1">Apply Here</a>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
+    {% else %}
+        <div class="col-lg-12 text-center">
+            <h3>No current job postings. Feel free to <a href="mailto:c.d'andrea@wustl.edu">contact us</a> if you're interested.</h3>
+            <br>
+        </div>
+    {% endif %}
     <p class="text-center" style="font-size: 8px">This site was designed and coded by <a href="mailto:vanandrew@wustl.edu">Andrew Van</a>.
                     View the source code<a target="_blank" href="https://github.com/greenelabwustl/greenelabsite"> here</a>.
                     Copyright (&copy;) 2018 Andrew Van.</p>
