@@ -55,12 +55,11 @@ class joblistingadmin(admin.ModelAdmin):
         ('Job Listing', {
             'fields': (
                 'title',
-                'jobid',
                 'description',
             )
         }),
     )
-    search_fields = ('title','jobid',)
+    search_fields = ('title',)
     save_as = True
 
 # current study listing
