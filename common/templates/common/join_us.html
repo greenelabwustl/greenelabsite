@@ -23,8 +23,6 @@
             <div class="grid-x">
                 <div class="cell small-12">
                     <h4 class="text-center">Apply below to join our team</h6>
-                    <h6 class= "text-center">The links below are for <b>external (Non-WashU) applicants only</b>. If you are a current WashU employee, 
-                        please apply <a target="_blank" href="https://wuissrv20.wustl.edu/psp/HRMS/EMPLOYEE/HRMS/c/HRS_HRAM_EMP.HRS_APP_SCHJOB.GBL?FOCUS=Employee&FolderPath=PORTAL_ROOT_OBJECT.CO_EMPLOYEE_SELF_SERVICE.HC_HRS_CE_GBL&IsFolder=false&IgnoreParamTempl=FolderPath%2cIsFolder">here</a>.</h6>
                 </div>
             </div>
         </div>
@@ -35,12 +33,11 @@
             {% for job in jobpostings %}
             <div class="cell small-10 small-offset-1 large-8 large-offset-2 job-box">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h4>{{job.title}} - {{job.jobid}}</h4></div>
+                    <div class="panel-heading"><h4>{{job.title}}</h4></div>
                     <div class="panel-body">
                         {% autoescape off %}
                         {{job.description}}
                         {% endautoescape %}
-                        <a class="btn btn-primary" target="_blank" href="https://jobs.wustl.edu/psc/APPLHRMS/EMPLOYEE/HRMS/c/HRS_HRAM.HRS_APP_SCHJOB.GBL?Page=HRS_APP_JBPST&REL_ACTION=Yes&SiteId=1&HRS_JO_PST_TYPE=E&HRS_JOB_OPENING_ID={{job.jobid}}&HRS_JO_PST_SEQ=1">Apply Here</a>
                     </div>
                 </div>
             </div>

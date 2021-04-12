@@ -168,11 +168,6 @@ class job_listing(models.Model):
         verbose_name = "Posting Date"
     )
 
-    # Create Job ID
-    jobid = models.IntegerField(
-        verbose_name = "Job ID#"
-    )
-
     # Create Job Description
     description = models.TextField(
         blank = True,
@@ -181,7 +176,7 @@ class job_listing(models.Model):
     )
 
     def __str__(self):
-        return self.title + " - " + str(self.jobid)
+        return self.title
 
 # Create class for current study listing
 class current_study(models.Model):
