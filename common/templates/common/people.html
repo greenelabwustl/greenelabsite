@@ -54,7 +54,7 @@
         </div>
         {% endfor %}
     </div>
-
+    {% if trainees %}
     <div class="grid-x">
       <h3 class="cell small-10 small-offset-1 large-8 large-offset-2">Other&nbsp;Trainees</h3>
         <div class="grid-x">
@@ -88,7 +88,7 @@
           {% endfor %}
         </div>
     </div>
-
+    {% endif %}
     <div class="grid-x">
           <h3 class="cell small-10 small-offset-1 large-8 large-offset-2">Alumni</h3>
             <div class="grid-x">
@@ -122,7 +122,7 @@
               {% endfor %}
             </div>
     </div>
-    
+
     <div class="grid-x">
       <div class="cell small-10 small-offset-1 large-8 large-offset-2">
         <img class="group-img img-responsive" src="{% static 'common/img/lab_photo_2022_funny.png' %}">
