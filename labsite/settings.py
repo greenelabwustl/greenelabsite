@@ -32,7 +32,7 @@ else: # Do these things when DEBUG is disabled
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_SSL_REDIRECT = True
 
-ALLOWED_HOSTS = ['greenelab.wustl.edu','localhost']
+ALLOWED_HOSTS = ['greenelab.ucsd.edu','localhost']
 
 # Application definition
 
