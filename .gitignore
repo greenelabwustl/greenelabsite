@@ -110,3 +110,4 @@ backup.sqlite3
 
 # media
 /media
+static/

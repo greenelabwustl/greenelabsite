@@ -2,7 +2,7 @@
 
 A common website backend for all my lab website projects
 
-#### Folder Structure
+#### tFolder Structure
 
 /labsite: contains the main django project  
 /common: application for the lab website
