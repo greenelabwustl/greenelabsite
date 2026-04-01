@@ -1,0 +1,35 @@
+services:
+  gunicorn:
+    image: dgreene/lab-website  # <- name this whatever you want, if you have a lab dockerhub upload it there!
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "5001:8000"
+    networks:
+      - main
+    volumes:
+      - ./:/local
+    environment:
+      - DATABASE_URL=postgres://ajxfstclzxhdss:postgres@postgres:5432/d7i8e5thopmkvh
+      - PRODUCTION=TRUE
+      - DEBUG=TRUE
+      - TZ=UTC
+      - USE_SUBPATH=FALSE  # <-- see next step on subpaths and set to TRUE if needed. Hopefully not though because this is an absolute pain to setup and figure out :sad:
+    restart: always
+  postgres:
+    image: postgres:15.2-alpine
+    networks:
+      - main
+    environment:
+      - POSTGRES_USER=ajxfstclzxhdss
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=d7i8e5thopmkvh
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    restart: always
+
+networks:
+  main: {}

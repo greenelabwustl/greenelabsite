@@ -32,8 +32,8 @@ except:
 if DEBUG: # Do these things if in DEBUG mode
     pass
 else: # Do these things when DEBUG is disabled
-    SECURE_CONTENT_TYPE_NOSNIFF = True
-    SECURE_SSL_REDIRECT = True
+    SECURE_CONTENT_TYPE_NOSNIFF = False
+    SECURE_SSL_REDIRECT = False
 
 ALLOWED_HOSTS = ['greenelab.ucsd.edu','localhost']
 
@@ -86,12 +86,17 @@ WSGI_APPLICATION = 'labsite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3'
-    }
-}
+DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": "test.db"}}
+# Use the DATABASE_URL env variable
+try:
+    if os.environ["PRODUCTION"] == "TRUE":
+        import dj_database_url
+        DATABASES["default"] = dj_database_url.config(
+            conn_max_age=600, ssl_require=False
+        )
+        print("DATABASE has been set to postgres.")
+except KeyError:
+    pass
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
