@@ -182,6 +182,7 @@ class job_listing(models.Model):
 class current_study(models.Model):
     class Meta:
         verbose_name = "Current Study"
+		ordering = ['order']
 
     # Create title for Study
     title = models.CharField(
@@ -210,6 +211,8 @@ class current_study(models.Model):
         blank = True,
         verbose_name = "Flier"
     )
+
+	order = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
