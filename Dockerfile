@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
 
 ADD . /app
 WORKDIR /app
-RUN pip install -U --force-reinstall pip
+# RUN pip install -U --force-reinstall pip
 RUN pip install -r requirements.txt
 RUN python manage.py collectstatic --noinput
 
