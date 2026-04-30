@@ -64,13 +64,13 @@ class joblistingadmin(admin.ModelAdmin):
 
 # current study listing
 class currentstudyadmin(admin.ModelAdmin):
-	list_display = ('title', 'order') 
-    ordering = ('order')
+    list_display = ('title', 'order')
+    ordering = ('order',)
     fieldsets = (
         ('Current Study', {
             'fields': (
                 'order',
-				'title',
+                'title',
                 'description',
                 'link',
                 'flier',
