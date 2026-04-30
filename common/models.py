@@ -182,37 +182,33 @@ class job_listing(models.Model):
 class current_study(models.Model):
     class Meta:
         verbose_name = "Current Study"
-		ordering = ['order']
+        ordering = ['order']
 
-    # Create title for Study
     title = models.CharField(
-        max_length = 350,
-        verbose_name = "Title"
+        max_length=350,
+        verbose_name="Title"
     )
 
-    # Create study description
     description = models.TextField(
-        blank = True,
-        null = True,
-        verbose_name = "Description"
+        blank=True,
+        null=True,
+        verbose_name="Description"
     )
 
-    # create link to study form
     link = models.CharField(
-        max_length = 1000,
-        null = True,
-        verbose_name = "Link"
+        max_length=1000,
+        null=True,
+        verbose_name="Link"
     )
 
-    # flier attachement
     flier = models.FileField(
         upload_to='attachments/',
-        null = True,
-        blank = True,
-        verbose_name = "Flier"
+        null=True,
+        blank=True,
+        verbose_name="Flier"
     )
 
-	order = models.IntegerField(default=0)
+    order = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
