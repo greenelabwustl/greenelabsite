@@ -81,3 +81,29 @@
 .home-text:hover {
     color: #222222;
 }
+.home-about {
+    background-color: #F4F4F4;
+    padding: 6% 10%;
+}
+.home-about .about-text {
+    max-width: 900px;
+    margin: 0 auto 1.5em auto;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #222222;
+}
+.donate-button {
+    display: inline-block;
+    padding: 0.75em 2.25em;
+    background-color: #DF744A;
+    color: #F4F4F4;
+    border-radius: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    -webkit-transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+}
+.donate-button:hover {
+    background-color: #c15f38;
+    color: #FFFFFF;
+}
