@@ -33,7 +33,7 @@ var h = 1;
 var camera = new THREE.PerspectiveCamera(60,($('.main-block').width()*w)/($('.main-block').height()*h),0.1,1000);
 camera.position.z = 250;
 camera.zoom = 1;
-var controls = new THREE.OrbitControls(camera);
+var controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.autoRotate = true;
 controls.enablePan = false;
 controls.enableKeys = false;
@@ -50,12 +50,7 @@ gui.close();
 var raycaster = new THREE.Raycaster();
 
 // Track mouse
-var mouse = new THREE.Vector2();
-function onMouseMove(event) {
-    mouse.x = (event.clientX/$('.main-block').width())*2-1;
-    mouse.y = -(event.clientY/$('.main-block').height())*2+1;
-}
-window.addEventListener('mousemove',onMouseMove,false);
+var mouse = new THREE.Vector2(); function onMouseMove(event) { var rect = renderer.domElement.getBoundingClientRect(); mouse.x = ((event.clientX-rect.left)/rect.width)*2-1; mouse.y = -((event.clientY-rect.top)/rect.height)*2+1; } renderer.domElement.addEventListener('mousemove',onMouseMove,false); renderer.domElement.addEventListener('mouseleave',function() { mouse.x = 10; mouse.y = 10; },false);
 
 // Make pial geometry for each hemisphere
 var left_pial = make_pial_geometry(lhdata,'L');
