@@ -33,7 +33,7 @@
     <div class="grid-x responsive-text">
         {% for study in studies %}
         <div class="cell small-8 small-offset-2 box">
-            <h4>{{ study.title }}</h4>
+            <h4>{{ study.title|safe }}</h4>
             {% autoescape off %}
             {{ study.description }}
             {% endautoescape %}
